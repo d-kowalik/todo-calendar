@@ -7,10 +7,10 @@ const VisibilityFilters = ({ onClick }) => (
     <button type="button" onClick={() => onClick(Filters.SHOW_ALL)}>
       Show All
     </button>
-    <button type="button" onClick={() => onClick(Filters.SHOW_ALL)}>
+    <button type="button" onClick={() => onClick(Filters.SHOW_COMPLETED)}>
       Show Completed
     </button>
-    <button type="button" onClick={() => onClick(Filters.SHOW_ALL)}>
+    <button type="button" onClick={() => onClick(Filters.SHOW_NOT_COMPLETED)}>
       Show Not Completed
     </button>
   </div>
