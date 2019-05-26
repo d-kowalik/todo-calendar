@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO } from './actions'
+import { ADD_TODO, TOGGLE_TODO, Filters } from './actions'
 
 const initialState = {
   todos: [
@@ -7,7 +7,8 @@ const initialState = {
       body: 'Create that app!',
       completed: false
     }
-  ]
+  ],
+  filter: Filters.SHOW_ALL
 }
 
 let nextId = 2
