@@ -1,48 +1,41 @@
 import { ADD_TODO, TOGGLE_TODO, CHANGE_FILTER, Filters } from './actions'
-
-const initialState = {
-  todos: [
-    {
-      id: 1,
-      body: 'Create that app!',
-      completed: false
-    }
-  ],
-  filter: Filters.SHOW_ALL
-}
+import { combineReducers } from 'redux'
 
 let nextId = 2
-export function todoReducer(state = initialState, action) {
+function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
-      return {
-        ...state,
-        todos: state.todos.concat({
-          id: nextId++,
-          body: action.body,
-          completed: false
-        })
-      }
+      return state.concat({
+        id: nextId++,
+        body: action.body,
+        completed: false
+      })
     case TOGGLE_TODO:
-      return {
-        ...state,
-        todos: state.todos.map(todo => {
-          if (todo.id === action.id) {
-            return {
-              id: todo.id,
-              body: todo.body,
-              completed: !todo.completed
-            }
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return {
+            id: todo.id,
+            body: todo.body,
+            completed: !todo.completed
           }
-          return todo
-        })
-      }
-    case CHANGE_FILTER:
-      return {
-        ...state,
-        filter: action.filter
-      }
+        }
+        return todo
+      })
     default:
       return state
   }
 }
+
+function filter(state = Filters.SHOW_ALL, action) {
+  switch (action.type) {
+    case CHANGE_FILTER:
+      return action.filter
+    default:
+      return state
+  }
+}
+
+export const todoReducer = combineReducers({
+  todos,
+  filter
+})
