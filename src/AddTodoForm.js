@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ADD_TODO } from './reducers'
+import { ADD_TODO } from './actions'
 
 class AddTodoForm extends Component {
   state = {
