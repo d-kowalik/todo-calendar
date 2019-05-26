@@ -1,26 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo } from './actions'
+import { toggleTodo, Filters } from './actions'
 
 import './TodoList.css'
 
 const TodoList = ({ toggleTodo, todos }) => (
   <ul className="TodoList">
-    {todos.map(todo => (
-      <li
-        key={todo.id}
-        className={todo.completed ? 'completed' : ''}
-        onClick={() => toggleTodo(todo.id)}
-      >
-        {todo.body}
-      </li>
-    ))}
+    {todos.map(todo => {
+      return (
+        <li
+          key={todo.id}
+          className={todo.completed ? 'completed' : ''}
+          onClick={() => toggleTodo(todo.id)}
+        >
+          {todo.body}
+        </li>
+      )
+    })}
   </ul>
 )
 
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case Filters.SHOW_COMPLETED:
+      return todos.filter(todo => todo.completed)
+    case Filters.SHOW_NOT_COMPLETD:
+      return todos.filter(todo => !todo.completed)
+    case Filters.SHOW_ALL:
+    default:
+      return todos
+  }
+}
+
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: getVisibleTodos(state.todos, state.filter)
   }
 }
 
