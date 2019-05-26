@@ -2,19 +2,37 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Filters, changeFilter } from './actions'
 
-const VisibilityFilters = ({ onClick }) => (
+const VisibilityFilters = ({ onClick, filter }) => (
   <div>
-    <button type="button" onClick={() => onClick(Filters.SHOW_ALL)}>
+    <button
+      type="button"
+      disabled={filter === Filters.SHOW_ALL}
+      onClick={() => onClick(Filters.SHOW_ALL)}
+    >
       Show All
     </button>
-    <button type="button" onClick={() => onClick(Filters.SHOW_COMPLETED)}>
+    <button
+      type="button"
+      disabled={filter === Filters.SHOW_COMPLETED}
+      onClick={() => onClick(Filters.SHOW_COMPLETED)}
+    >
       Show Completed
     </button>
-    <button type="button" onClick={() => onClick(Filters.SHOW_NOT_COMPLETED)}>
+    <button
+      type="button"
+      disabled={filter === Filters.SHOW_NOT_COMPLETED}
+      onClick={() => onClick(Filters.SHOW_NOT_COMPLETED)}
+    >
       Show Not Completed
     </button>
   </div>
 )
+
+const mapStateToProps = state => {
+  return {
+    filter: state.filter
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -25,6 +43,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(VisibilityFilters)
