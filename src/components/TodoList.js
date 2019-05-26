@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { toggleTodo, Filters } from '../actions'
 
-import './TodoList.css'
+import '../styles/TodoList.css'
 
 const TodoList = ({ toggleTodo, todos }) => (
   <ul className="TodoList">
