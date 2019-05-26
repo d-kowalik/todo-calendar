@@ -1,4 +1,4 @@
-import { CHANGE_FILTER, Filters } from './actions'
+import { CHANGE_FILTER, Filters } from '../actions'
 
 export function filter(state = Filters.SHOW_ALL, action) {
   switch (action.type) {
