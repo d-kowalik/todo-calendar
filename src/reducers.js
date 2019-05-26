@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, Filters } from './actions'
+import { ADD_TODO, TOGGLE_TODO, CHANGE_FILTER, Filters } from './actions'
 
 const initialState = {
   todos: [
@@ -36,6 +36,11 @@ export function todoReducer(state = initialState, action) {
           }
           return todo
         })
+      }
+    case CHANGE_FILTER:
+      return {
+        ...state,
+        filter: action.filter
       }
     default:
       return state
