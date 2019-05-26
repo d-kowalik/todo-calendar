@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ADD_TODO } from './actions'
+import { addTodo } from './actions'
 
 class AddTodoForm extends Component {
   state = {
@@ -35,7 +35,7 @@ class AddTodoForm extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     addTodo: body => {
-      dispatch({ type: ADD_TODO, body })
+      dispatch(addTodo(body))
     }
   }
 }
