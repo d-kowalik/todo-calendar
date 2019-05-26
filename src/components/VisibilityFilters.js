@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Filters, changeFilter } from './actions'
+import { Filters, changeFilter } from '../actions'
 
 const VisibilityFilters = ({ onClick, filter }) => (
   <div>

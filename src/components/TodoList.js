@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo, Filters } from './actions'
+import { toggleTodo, Filters } from '../actions'
 
 import './TodoList.css'
 
