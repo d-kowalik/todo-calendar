@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Filters, changeFilter } from '../actions'
+import '../styles/VisibilityFilters.css'
 
 const VisibilityFilters = ({ onClick, filter }) => (
-  <div>
+  <div className="VisibilityFilters">
     <button
       type="button"
       disabled={filter === Filters.SHOW_ALL}

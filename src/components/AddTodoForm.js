@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+import '../styles/AddTodoForm.css'
 
 class AddTodoForm extends Component {
   state = {
@@ -21,13 +22,15 @@ class AddTodoForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.input}
-          onChange={this.handleChange}
-        />
-      </form>
+      <div className="AddTodoForm">
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.input}
+            onChange={this.handleChange}
+          />
+        </form>
+      </div>
     )
   }
 }

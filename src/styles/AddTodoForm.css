@@ -1,0 +1,9 @@
+.AddTodoForm form {
+  width: 100%;
+}
+
+.AddTodoForm form input {
+  font-size: 1.1em;
+  padding: 5px;
+  width: 95%;
+}

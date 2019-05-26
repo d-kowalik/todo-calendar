@@ -3,7 +3,11 @@ import '../styles/App.css'
 import TodoBlock from './TodoBlock'
 
 function App() {
-  return <TodoBlock />
+  return (
+    <div className="App">
+      <TodoBlock />
+    </div>
+  )
 }
 
 export default App
