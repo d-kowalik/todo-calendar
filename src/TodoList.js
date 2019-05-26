@@ -24,7 +24,7 @@ const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case Filters.SHOW_COMPLETED:
       return todos.filter(todo => todo.completed)
-    case Filters.SHOW_NOT_COMPLETD:
+    case Filters.SHOW_NOT_COMPLETED:
       return todos.filter(todo => !todo.completed)
     case Filters.SHOW_ALL:
     default:
