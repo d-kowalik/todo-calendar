@@ -1,0 +1,3 @@
+.TodoList li.completed {
+  text-decoration: line-through;
+}

@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleTodo } from './actions'
 
+import './TodoList.css'
+
 class TodoList extends Component {
   render() {
     return (
-      <ul>
+      <ul className="TodoList">
         {this.props.todos.map(todo => (
-          <li key={todo.id} onClick={() => this.props.toggleTodo(todo.id)}>
+          <li
+            key={todo.id}
+            className={todo.completed ? 'completed' : ''}
+            onClick={() => this.props.toggleTodo(todo.id)}
+          >
             {todo.body}
           </li>
         ))}
