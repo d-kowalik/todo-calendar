@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AddTodoForm from './AddTodoForm'
 import TodoList from './TodoList'
 import VisibilityFilters from './VisibilityFilters'
+import { connect } from 'react-redux'
 import '../styles/TodoBlock.css'
 
 class TodoBlock extends Component {
@@ -17,4 +18,10 @@ class TodoBlock extends Component {
   }
 }
 
-export default TodoBlock
+const mapStateToProps = state => {
+  return {
+    date: state.selectedDate
+  }
+}
+
+export default connect(mapStateToProps)(TodoBlock)
