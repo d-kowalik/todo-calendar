@@ -28,6 +28,7 @@ class AddTodoForm extends Component {
             type="text"
             value={this.state.input}
             onChange={this.handleChange}
+            placeholder="New todo"
           />
         </form>
       </div>
