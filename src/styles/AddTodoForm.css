@@ -1,9 +1,10 @@
 .AddTodoForm form {
   width: 100%;
+  display: flex;
 }
 
 .AddTodoForm form input {
   font-size: 1.1em;
   padding: 5px;
-  width: 95%;
+  flex-grow: 1;
 }
