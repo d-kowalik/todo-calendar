@@ -1,6 +1,6 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions'
 import Cookies from 'universal-cookie'
-import { assembleDate } from '../dateHelper'
+import { today } from '../dateHelper'
 
 const cookies = new Cookies()
 
@@ -12,8 +12,7 @@ const getInitialState = date => {
   return cookies.get(date) === undefined ? [] : cookies.get(date)
 }
 
-const date = assembleDate(new Date())
-const initialState = getInitialState(date)
+const initialState = getInitialState(today())
 let nextId =
   initialState.length === 0 ? 1 : initialState[initialState.length - 1].id + 1
 

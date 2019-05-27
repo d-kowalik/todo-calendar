@@ -1,8 +1,8 @@
 import { filter } from './filterReducer'
 import { todos } from './todosReducer'
-import { assembleDate } from '../dateHelper'
+import { today } from '../dateHelper'
 
-const date = assembleDate(new Date())
+const date = today()
 
 const selectedDate = (state = date, action) => {
   return state

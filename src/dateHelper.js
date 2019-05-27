@@ -22,3 +22,5 @@ export function dateStringToDate(string) {
   const day = dateComponents[0]
   return new Date(year, month, day)
 }
+
+export const today = () => assembleDate(new Date())
