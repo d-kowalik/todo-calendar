@@ -1,16 +1,24 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions'
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 
-let nextId = 2
+const saveTodosToCookies = todos => {
+  cookies.set('todos', todos)
+}
+
+let nextId = 1
 export function todos(state = [], action) {
   switch (action.type) {
     case ADD_TODO:
-      return state.concat({
+      let newState = state.concat({
         id: nextId++,
         body: action.body,
         completed: false
       })
+      saveTodosToCookies(newState)
+      return newState
     case TOGGLE_TODO:
-      return state.map(todo => {
+      newState = state.map(todo => {
         if (todo.id === action.id) {
           return {
             id: todo.id,
@@ -20,8 +28,12 @@ export function todos(state = [], action) {
         }
         return todo
       })
+      saveTodosToCookies(newState)
+      return newState
     case DELETE_TODO:
-      return state.filter(todo => todo.id !== action.id)
+      newState = state.filter(todo => todo.id !== action.id)
+      saveTodosToCookies(newState)
+      return newState
     default:
       return state
   }
