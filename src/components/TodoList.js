@@ -13,7 +13,7 @@ const TodoList = ({ toggleTodo, todos, deleteTodo }) => (
           className={todo.completed ? 'completed' : ''}
           onClick={() => toggleTodo(todo.id)}
         >
-          {todo.body}
+          <p>{todo.body}</p>
           <button
             type="button"
             className="flat"

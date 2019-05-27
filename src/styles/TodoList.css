@@ -8,7 +8,15 @@
 }
 
 .TodoList li {
-  margin-left: 7%;
+  margin-left: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 40px;
+}
+
+.TodoList p {
+  align-self: center;
 }
 
 .TodoList li:hover {
