@@ -8,6 +8,7 @@ class TodoBlock extends Component {
   render() {
     return (
       <div className="TodoBlock">
+        <h1>{this.props.date}</h1>
         <AddTodoForm />
         <TodoList />
         <VisibilityFilters />
