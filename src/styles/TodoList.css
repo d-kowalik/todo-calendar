@@ -11,6 +11,10 @@
   margin-left: 7%;
 }
 
+.TodoList li:hover {
+  cursor: pointer;
+}
+
 .TodoList li.completed {
   text-decoration: line-through;
   font-weight: normal;
