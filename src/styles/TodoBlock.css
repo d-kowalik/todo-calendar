@@ -1,6 +1,6 @@
 .TodoBlock {
-  height: 60vh;
-  min-width: 30vw;
+  height: 65vh;
+  min-width: 45vw;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   display: grid;
   grid-template-rows: 1fr 10fr 1fr;
