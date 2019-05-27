@@ -1,16 +1,19 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions'
 import Cookies from 'universal-cookie'
+import { assembleDate } from '../dateHelper'
+
 const cookies = new Cookies()
 
-const saveTodosToCookies = todos => {
-  cookies.set('todos', todos)
+const saveTodosToCookies = (todos, date) => {
+  cookies.set(date, todos)
 }
 
-const getInitialState = () => {
-  return cookies.get('todos')
+const getInitialState = date => {
+  return cookies.get(date) === undefined ? [] : cookies.get(date)
 }
 
-const initialState = getInitialState()
+const date = assembleDate(new Date())
+const initialState = getInitialState(date)
 let nextId =
   initialState.length === 0 ? 1 : initialState[initialState.length - 1].id + 1
 
@@ -23,7 +26,7 @@ export function todos(state = initialState, action, selectedDate) {
         body: action.body,
         completed: false
       })
-      saveTodosToCookies(newState)
+      saveTodosToCookies(newState, selectedDate)
       return newState
     case TOGGLE_TODO:
       newState = state.map(todo => {
@@ -36,11 +39,11 @@ export function todos(state = initialState, action, selectedDate) {
         }
         return todo
       })
-      saveTodosToCookies(newState)
+      saveTodosToCookies(newState, selectedDate)
       return newState
     case DELETE_TODO:
       newState = state.filter(todo => todo.id !== action.id)
-      saveTodosToCookies(newState)
+      saveTodosToCookies(newState, selectedDate)
       return newState
     default:
       return state
