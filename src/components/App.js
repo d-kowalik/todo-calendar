@@ -18,6 +18,15 @@ function assembleDate(date) {
   return `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
 }
 
+function dateStringToDate(string) {
+  const datePart = string.split(', ')
+  const dateComponents = datePart[1].split('-')
+  const year = dateComponents[2]
+  const month = dateComponents[1]
+  const day = dateComponents[0]
+  return new Date(year, month, day)
+}
+
 function App() {
   const date = new Date()
   const fullDate = assembleDate(date)
