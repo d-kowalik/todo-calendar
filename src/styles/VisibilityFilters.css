@@ -1,2 +1,12 @@
 .VisibilityFilters {
+  display: flex;
+  justify-content: space-around;
+}
+
+.VisibilityFilters button {
+  padding: 10px;
+  background: transparent;
+  box-shadow: none;
+  font-weight: bold;
+  font-size: 0.9em;
 }
