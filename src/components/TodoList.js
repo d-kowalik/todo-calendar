@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo, Filters } from '../actions'
+import { toggleTodo, Filters, deleteTodo } from '../actions'
 
 import '../styles/TodoList.css'
 
-const TodoList = ({ toggleTodo, todos }) => (
+const TodoList = ({ toggleTodo, todos, deleteTodo }) => (
   <ul className="TodoList">
     {todos.map(todo => {
       return (
@@ -14,6 +14,9 @@ const TodoList = ({ toggleTodo, todos }) => (
           onClick={() => toggleTodo(todo.id)}
         >
           {todo.body}
+          <button type="Button" onClick={() => deleteTodo(todo.id)}>
+            X
+          </button>
         </li>
       )
     })}
@@ -42,6 +45,9 @@ const mapDispatchToProps = dispatch => {
   return {
     toggleTodo: id => {
       dispatch(toggleTodo(id))
+    },
+    deleteTodo: id => {
+      dispatch(deleteTodo(id))
     }
   }
 }
