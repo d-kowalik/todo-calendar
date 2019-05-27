@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-.TodoList li.completed {
+.TodoList li.completed > p {
   text-decoration: line-through;
   font-weight: normal;
   color: lightslategray;
