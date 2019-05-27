@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { filter } from './filterReducer'
 import { todos } from './todosReducer'
 import { assembleDate } from '../dateHelper'
@@ -9,8 +8,11 @@ const selectedDate = (state = date, action) => {
   return state
 }
 
-export const rootReducer = combineReducers({
-  todos,
-  filter,
-  selectedDate
-})
+export const rootReducer = (state = {}, action) => {
+  const d = selectedDate(state.selectedDate, action)
+  return {
+    todos: todos(state.todos, action, d),
+    filter: filter(state.filter, action),
+    selectedDate: d
+  }
+}

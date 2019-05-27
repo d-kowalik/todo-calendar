@@ -14,7 +14,7 @@ const initialState = getInitialState()
 let nextId =
   initialState.length === 0 ? 1 : initialState[initialState.length - 1].id + 1
 
-export function todos(state = initialState, action) {
+export function todos(state = initialState, action, selectedDate) {
   let newState
   switch (action.type) {
     case ADD_TODO:
