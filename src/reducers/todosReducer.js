@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO } from '../actions'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions'
 
 let nextId = 2
 export function todos(state = [], action) {
@@ -20,6 +20,8 @@ export function todos(state = [], action) {
         }
         return todo
       })
+    case DELETE_TODO:
+      return state.filter(todo => todo.id !== action.id)
     default:
       return state
   }
