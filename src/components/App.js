@@ -2,8 +2,7 @@ import React from 'react'
 import '../styles/App.css'
 import TodoBlock from './TodoBlock'
 
-function App() {
-  let date = new Date()
+function assembleDate(date) {
   let day = date.getDate()
   let month = date.getMonth()
   let year = date.getFullYear()
@@ -16,7 +15,13 @@ function App() {
     'Friday',
     'Saturday'
   ]
-  let fullDate = `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
+  return `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
+}
+
+function App() {
+  const date = new Date()
+  const fullDate = assembleDate(date)
+
   return (
     <div className="App">
       <TodoBlock date={fullDate} />
