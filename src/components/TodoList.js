@@ -14,7 +14,11 @@ const TodoList = ({ toggleTodo, todos, deleteTodo }) => (
           onClick={() => toggleTodo(todo.id)}
         >
           {todo.body}
-          <button type="Button" onClick={() => deleteTodo(todo.id)}>
+          <button
+            type="button"
+            className="flat"
+            onClick={() => deleteTodo(todo.id)}
+          >
             X
           </button>
         </li>

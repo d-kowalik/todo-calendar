@@ -7,6 +7,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
   <div className="VisibilityFilters">
     <button
       type="button"
+      className="flat"
       disabled={filter === Filters.SHOW_ALL}
       onClick={() => onClick(Filters.SHOW_ALL)}
     >
@@ -14,6 +15,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
     </button>
     <button
       type="button"
+      className="flat"
       disabled={filter === Filters.SHOW_COMPLETED}
       onClick={() => onClick(Filters.SHOW_COMPLETED)}
     >
@@ -21,6 +23,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
     </button>
     <button
       type="button"
+      className="flat"
       disabled={filter === Filters.SHOW_NOT_COMPLETED}
       onClick={() => onClick(Filters.SHOW_NOT_COMPLETED)}
     >

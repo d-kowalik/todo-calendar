@@ -24,3 +24,11 @@ input {
 button:hover {
   cursor: pointer;
 }
+
+button.flat {
+  padding: 10px;
+  background: transparent;
+  box-shadow: none;
+  font-weight: bold;
+  font-size: 0.9em;
+}
