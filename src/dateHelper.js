@@ -23,4 +23,16 @@ export function dateStringToDate(string) {
   return new Date(year, month, day)
 }
 
+export const advanceDateByDay = date => {
+  const tomorrow = new Date()
+  tomorrow.setDate(date.getDate() + 1)
+  return tomorrow
+}
+
+export const reverseDateByDay = date => {
+  const tomorrow = new Date()
+  tomorrow.setDate(date.getDate() - 1)
+  return tomorrow
+}
+
 export const today = () => assembleDate(new Date())
