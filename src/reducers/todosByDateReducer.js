@@ -18,7 +18,7 @@ export const todosByDate = (state = {}, action, date) => {
   }
 
   let nextId =
-    todosAtDate.length === 0 ? 1 : todosAtDate[todosAtDate.length - 1] + 1
+    todosAtDate.length === 0 ? 1 : todosAtDate[todosAtDate.length - 1].id + 1
   let newTodos
   switch (action.type) {
     case ADD_TODO:
