@@ -40,6 +40,7 @@ const todosByDate = (state = {}, action, date) => {
   if (todosAtDate === undefined) {
     todosAtDate = getStateFromCookies(date)
   }
+
   let nextId =
     todosAtDate.length === 0 ? 1 : todosAtDate[todosAtDate.length - 1] + 1
   let newTodos
@@ -79,14 +80,21 @@ const todosByDate = (state = {}, action, date) => {
         [date]: newTodos
       }
     default:
+      if (state[date] === undefined) {
+        return {
+          ...state,
+          [date]: todosAtDate
+        }
+      }
       return state
   }
 }
 
 export const rootReducer = (state = {}, action) => {
   const date = selectedDate(state.selectedDate, action)
+
   return {
-    todosByDate: todosByDate(state.todosByDate, action),
+    todosByDate: todosByDate(state.todosByDate, action, date),
     todos: todos(state.todos, action, date),
     filter: filter(state.filter, action),
     selectedDate: date
