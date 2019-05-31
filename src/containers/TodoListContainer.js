@@ -1,12 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo, Filters, deleteTodo } from '../actions'
+import { Filters } from '../actions'
 
 import TodoList from '../components/TodoList'
 
-const TodoListContainer = ({ toggleTodo, todos, deleteTodo }) => (
-  <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-)
+const TodoListContainer = ({ todos }) => <TodoList todos={todos} />
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -25,19 +23,4 @@ const mapStateToProps = state => {
     todos: getVisibleTodos(state.todosByDate[state.selectedDate], state.filter)
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleTodo: id => {
-      dispatch(toggleTodo(id))
-    },
-    deleteTodo: id => {
-      dispatch(deleteTodo(id))
-    }
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoListContainer)
+export default connect(mapStateToProps)(TodoListContainer)

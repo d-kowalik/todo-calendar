@@ -1,26 +1,11 @@
 import React from 'react'
-
+import TodoContainer from '../containers/TodoContainer'
 import '../styles/TodoList.css'
 
-const TodoList = ({ toggleTodo, todos, deleteTodo }) => (
+const TodoList = ({ todos }) => (
   <ul className="TodoList">
     {todos.map(todo => {
-      return (
-        <li
-          key={todo.id}
-          className={todo.completed ? 'completed' : ''}
-          onClick={() => toggleTodo(todo.id)}
-        >
-          <p>{todo.body}</p>
-          <button
-            type="button"
-            className="flat"
-            onClick={() => deleteTodo(todo.id)}
-          >
-            X
-          </button>
-        </li>
-      )
+      return <TodoContainer key={todo.id} todo={todo} />
     })}
   </ul>
 )
