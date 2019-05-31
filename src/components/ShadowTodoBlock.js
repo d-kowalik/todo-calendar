@@ -9,8 +9,11 @@ const ShadowTodoBlock = ({ date, onClick }) => {
 
   return (
     <div className="TodoBlock Shadow" onClick={onClick}>
-      <h2>{date}</h2>
-      <TodoList todos={todos} />
+      <div>
+        <h2>{date}</h2>
+        <TodoList todos={todos} />
+      </div>
+      <div className="ShadowOverlay" />
     </div>
   )
 }
