@@ -4,9 +4,7 @@ import { Filters } from '../actions'
 
 import TodoList from '../components/TodoList'
 
-const TodoListContainer = ({ toggleTodo, todos, deleteTodo }) => (
-  <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-)
+const TodoListContainer = ({ todos }) => <TodoList todos={todos} />
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
