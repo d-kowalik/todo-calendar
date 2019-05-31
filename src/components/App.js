@@ -14,15 +14,19 @@ import {
 function App(props) {
   return (
     <div className="App">
-      <ShadowTodoBlock
-        date={assembleDate(reverseDateByDay(dateStringToDate(props.date)))}
-        onClick={props.previousDay}
-      />
+      {window.screen.availWidth > 600 ? (
+        <ShadowTodoBlock
+          date={assembleDate(reverseDateByDay(dateStringToDate(props.date)))}
+          onClick={props.previousDay}
+        />
+      ) : null}
       <TodoBlock />
-      <ShadowTodoBlock
-        date={assembleDate(advanceDateByDay(dateStringToDate(props.date)))}
-        onClick={props.nextDay}
-      />
+      {window.screen.availWidth > 600 ? (
+        <ShadowTodoBlock
+          date={assembleDate(advanceDateByDay(dateStringToDate(props.date)))}
+          onClick={props.nextDay}
+        />
+      ) : null}
     </div>
   )
 }

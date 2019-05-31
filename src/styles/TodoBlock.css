@@ -10,6 +10,13 @@
   z-index: 1;
 }
 
+@media only screen and (max-width: 600px) {
+  .TodoBlock {
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
 .TodoBlock h2 {
   text-align: left;
   padding-left: 0.5%;
