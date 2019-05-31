@@ -1,15 +1,17 @@
 import React from 'react'
 import '../styles/App.css'
+import ShadowTodoBlock from './ShadowTodoBlock'
 import TodoBlock from './TodoBlock'
 import { connect } from 'react-redux'
 import { reverseDay, advanceDay } from '../actions'
+import { advanceDateByDay, reverseDateByDay, assembleDate } from '../dateHelper'
 
 function App(props) {
   return (
     <div className="App">
-      <button onClick={props.previousDay}>Previous Day</button>
+      <ShadowTodoBlock date={assembleDate(reverseDateByDay(new Date()))} />
       <TodoBlock />
-      <button onClick={props.nextDay}>Next Day</button>
+      <ShadowTodoBlock date={assembleDate(advanceDateByDay(new Date()))} />
     </div>
   )
 }
