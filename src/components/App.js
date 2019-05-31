@@ -19,20 +19,22 @@ class App extends Component {
 
   handleSwipeStart = event => {
     event.persist()
-    console.log(event)
 
-    this.setState({ initialPositionX: event.clientX })
+    this.setState({ initialPositionX: event.changedTouches[0].clientX })
   }
 
   handleSwipeMove = event => {
-    this.setState({ currentPositionX: event.clientX })
+    event.persist()
+    this.setState({ currentPositionX: event.changedTouches[0].clientX })
   }
 
   handleSwipeEnd = event => {
     const res = this.state.initialPositionX - this.state.currentPositionX
-    if (res < -100) {
+    console.log(res)
+
+    if (res < -50) {
       this.props.nextDay()
-    } else if (res > 100) {
+    } else if (res > 50) {
       this.props.previousDay()
     }
   }
