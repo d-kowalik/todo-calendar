@@ -10,6 +10,13 @@
   z-index: 1;
 }
 
+@media only screen and (max-width: 600px) {
+  .TodoBlock {
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
 .TodoBlock h2 {
   text-align: left;
   padding-left: 0.5%;
@@ -20,6 +27,11 @@
   z-index: 0;
   position: relative;
   grid-template-rows: 1fr 12fr;
+  font-size: 1.3em;
+}
+
+.TodoBlock.Shadow li {
+  font-size: 1.25em;
 }
 
 .TodoBlock.Shadow:first-of-type {
@@ -32,4 +44,16 @@
 
 .TodoBlock.Shadow h2 {
   text-align: center;
+}
+
+.ShadowOverlay {
+  position: absolute;
+  background: lightslategray;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+}
+
+.ShadowOverlay:hover {
+  cursor: pointer;
 }
