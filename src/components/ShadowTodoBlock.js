@@ -8,7 +8,7 @@ const ShadowTodoBlock = ({ date }) => {
   todos = todos === undefined ? [] : todos
 
   return (
-    <div>
+    <div className="TodoBlock Shadow">
       <h2>{date}</h2>
       <TodoList todos={todos} />
     </div>

@@ -7,9 +7,28 @@
   border-radius: 6px;
   padding: 3px;
   background: #ffffff;
+  z-index: 1;
 }
 
 .TodoBlock h2 {
   text-align: left;
   padding-left: 0.5%;
+}
+
+.TodoBlock.Shadow {
+  transform: scale(0.8);
+  z-index: 0;
+  position: relative;
+}
+
+.TodoBlock.Shadow:first-of-type {
+  right: -10%;
+}
+
+.TodoBlock.Shadow:last-of-type {
+  left: -10%;
+}
+
+.TodoBlock.Shadow h2 {
+  text-align: center;
 }

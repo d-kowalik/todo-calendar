@@ -28,3 +28,12 @@
   font-weight: normal;
   color: lightslategray;
 }
+
+.Shadow .TodoList p {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.Shadow .TodoList button {
+  display: none;
+}
