@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Filters, changeFilter } from '../actions'
+import {
+  SHOW_ALL_STRING,
+  SHOW_COMPLETED_STRING,
+  SHOW_NOT_COMPLETED_STRING
+} from '../language'
 import '../styles/VisibilityFilters.css'
 
 const VisibilityFilters = ({ onClick, filter }) => (
@@ -11,7 +16,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
       disabled={filter === Filters.SHOW_ALL}
       onClick={() => onClick(Filters.SHOW_ALL)}
     >
-      Show All
+      {SHOW_ALL_STRING}
     </button>
     <button
       type="button"
@@ -19,7 +24,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
       disabled={filter === Filters.SHOW_COMPLETED}
       onClick={() => onClick(Filters.SHOW_COMPLETED)}
     >
-      Show Completed
+      {SHOW_COMPLETED_STRING}
     </button>
     <button
       type="button"
@@ -27,7 +32,7 @@ const VisibilityFilters = ({ onClick, filter }) => (
       disabled={filter === Filters.SHOW_NOT_COMPLETED}
       onClick={() => onClick(Filters.SHOW_NOT_COMPLETED)}
     >
-      Show Not Completed
+      {SHOW_NOT_COMPLETED_STRING}
     </button>
   </div>
 )
