@@ -1,17 +1,45 @@
+const weekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+]
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+
 export function assembleDate(date) {
   let day = date.getDate()
   let month = date.getMonth() + 1
   let year = date.getFullYear()
-  let weekdays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-  ]
+
   return `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
+}
+
+export function readableDateFromString(dateString) {
+  return readableDate(dateStringToDate(dateString))
+}
+
+export function readableDate(date) {
+  let day = date.getDate()
+  let month = date.getMonth()
+
+  return `${weekdays[date.getDay()]}, ${months[month]} ${day}`
 }
 
 export function dateStringToDate(string) {
