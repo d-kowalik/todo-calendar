@@ -7,7 +7,7 @@ import '../styles/TodoBlock.css'
 
 const TodoBlock = ({ date }) => (
   <div className="TodoBlock">
-    <TodoBlockHeader />
+    <TodoBlockHeader date={date} />
     <AddTodoForm />
     <TodoListContainer date={date} />
     <VisibilityFilters />
