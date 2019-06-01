@@ -1,15 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TodoList from './TodoList'
-import TodoBlockHeader from './TodoBlockHeader'
+import TodoBlock from './TodoBlock'
 
 const ShadowTodoBlock = ({ date, onClick, todos }) => {
   return (
-    <div className="TodoBlock Shadow" onClick={onClick}>
-      <div>
-        <TodoBlockHeader date={date} />
-        <TodoList todos={todos} />
-      </div>
+    <div className="Shadow" onClick={onClick}>
+      <TodoBlock date={date} />
       <div className="ShadowOverlay" />
     </div>
   )
