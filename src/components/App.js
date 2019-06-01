@@ -14,38 +14,49 @@ import {
 class App extends Component {
   state = {
     initialPositionX: 0,
-    currentPositionX: 0
+    currentPositionX: 0,
+    beingTouched: false,
+    didSwipe: false
   }
 
   handleSwipeStart = event => {
-    event.persist()
-
-    this.setState({ initialPositionX: event.changedTouches[0].clientX })
+    this.setState({
+      initialPositionX: event.changedTouches[0].clientX,
+      beingTouched: true
+    })
   }
 
   handleSwipeMove = event => {
-    event.persist()
-    this.setState({ currentPositionX: event.changedTouches[0].clientX })
+    if (this.state.beingTouched) {
+      this.setState({
+        currentPositionX: event.changedTouches[0].clientX,
+        didSwipe: true
+      })
+    }
   }
 
   handleSwipeEnd = event => {
-    const res = this.state.initialPositionX - this.state.currentPositionX
-    console.log(res)
+    if (!this.state.didSwipe) return
 
-    if (res < -50) {
-      this.props.nextDay()
-    } else if (res > 50) {
+    const res = this.state.initialPositionX - this.state.currentPositionX
+    if (res < -80) {
       this.props.previousDay()
+    } else if (res > 80) {
+      this.props.nextDay()
     }
+
+    this.setState({
+      initialPositionX: 0,
+      currentPositionX: 0,
+      beingTouched: false,
+      didSwipe: false
+    })
   }
 
   render() {
     return (
       <div
         className="App"
-        onMouseDown={this.handleSwipeStart}
-        onMouseMove={this.handleSwipeMove}
-        onMouseUp={this.handleSwipeEnd}
         onTouchStart={this.handleSwipeStart}
         onTouchMove={this.handleSwipeMove}
         onTouchEnd={this.handleSwipeEnd}
@@ -58,11 +69,7 @@ class App extends Component {
             onClick={this.props.previousDay}
           />
         ) : null}
-        <TodoBlock
-          onMouseDown={this.handleSwipeStart}
-          onMouseMove={this.handleSwipeMove}
-          onMouseUp={this.handleSwipeEnd}
-        />
+        <TodoBlock />
         {window.screen.availWidth > 600 ? (
           <ShadowTodoBlock
             date={assembleDate(
