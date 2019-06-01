@@ -69,7 +69,7 @@ class App extends Component {
             onClick={this.props.previousDay}
           />
         ) : null}
-        <TodoBlock />
+        <TodoBlock date={this.props.date} />
         {window.screen.availWidth > 600 ? (
           <ShadowTodoBlock
             date={assembleDate(
