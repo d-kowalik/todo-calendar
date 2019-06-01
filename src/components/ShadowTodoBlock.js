@@ -1,13 +1,9 @@
 import React from 'react'
-import Cookies from 'universal-cookie'
+import { connect } from 'react-redux'
 import TodoList from './TodoList'
 import TodoBlockHeader from './TodoBlockHeader'
 
-const ShadowTodoBlock = ({ date, onClick }) => {
-  const cookies = new Cookies()
-  let todos = cookies.get(date)
-  todos = todos === undefined ? [] : todos
-
+const ShadowTodoBlock = ({ date, onClick, todos }) => {
   return (
     <div className="TodoBlock Shadow" onClick={onClick}>
       <div>
@@ -19,4 +15,12 @@ const ShadowTodoBlock = ({ date, onClick }) => {
   )
 }
 
-export default ShadowTodoBlock
+const mapStateToProps = (state, ownProps) => {
+  console.log(state)
+
+  return {
+    todos: state.todosByDate[ownProps.date]
+  }
+}
+
+export default connect(mapStateToProps)(ShadowTodoBlock)
