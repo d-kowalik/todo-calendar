@@ -61,23 +61,19 @@ class App extends Component {
         onTouchMove={this.handleSwipeMove}
         onTouchEnd={this.handleSwipeEnd}
       >
-        {window.screen.availWidth > 600 ? (
-          <ShadowTodoBlock
-            date={assembleDate(
-              reverseDateByDay(dateStringToDate(this.props.date))
-            )}
-            onClick={this.props.previousDay}
-          />
-        ) : null}
+        <ShadowTodoBlock
+          date={assembleDate(
+            reverseDateByDay(dateStringToDate(this.props.date))
+          )}
+          onClick={this.props.previousDay}
+        />
         <TodoBlock date={this.props.date} />
-        {window.screen.availWidth > 600 ? (
-          <ShadowTodoBlock
-            date={assembleDate(
-              advanceDateByDay(dateStringToDate(this.props.date))
-            )}
-            onClick={this.props.nextDay}
-          />
-        ) : null}
+        <ShadowTodoBlock
+          date={assembleDate(
+            advanceDateByDay(dateStringToDate(this.props.date))
+          )}
+          onClick={this.props.nextDay}
+        />
       </div>
     )
   }
