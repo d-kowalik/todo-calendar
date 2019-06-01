@@ -12,8 +12,8 @@
 
 @media only screen and (max-width: 600px) {
   .TodoBlock {
-    min-width: 100%;
-    min-height: 100%;
+    min-width: 95vw;
+    min-height: 100vh;
   }
 }
 

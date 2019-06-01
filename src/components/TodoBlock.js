@@ -5,11 +5,11 @@ import TodoBlockHeader from './TodoBlockHeader'
 import VisibilityFilters from './VisibilityFilters'
 import '../styles/TodoBlock.css'
 
-const TodoBlock = () => (
+const TodoBlock = ({ date }) => (
   <div className="TodoBlock">
-    <TodoBlockHeader />
+    <TodoBlockHeader date={date} />
     <AddTodoForm />
-    <TodoListContainer />
+    <TodoListContainer date={date} />
     <VisibilityFilters />
   </div>
 )

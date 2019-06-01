@@ -1,5 +1,11 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions'
 import Cookies from 'universal-cookie'
+import {
+  advanceDateByDay,
+  reverseDateByDay,
+  assembleDate,
+  dateStringToDate
+} from '../dateHelper'
 
 const cookies = new Cookies()
 
@@ -15,6 +21,18 @@ export const todosByDate = (state = {}, action, date) => {
   let todosAtDate = state[date]
   if (todosAtDate === undefined) {
     todosAtDate = getStateFromCookies(date)
+  }
+
+  let tomorrow = assembleDate(advanceDateByDay(dateStringToDate(date)))
+  let todosTomorrow = state[tomorrow]
+  if (todosTomorrow === undefined) {
+    todosTomorrow = getStateFromCookies(tomorrow)
+  }
+
+  let yesterday = assembleDate(reverseDateByDay(dateStringToDate(date)))
+  let todosYesterday = state[yesterday]
+  if (todosYesterday === undefined) {
+    todosYesterday = getStateFromCookies(yesterday)
   }
 
   let nextId =
@@ -56,10 +74,16 @@ export const todosByDate = (state = {}, action, date) => {
         [date]: newTodos
       }
     default:
-      if (state[date] === undefined) {
+      if (
+        state[date] === undefined ||
+        state[tomorrow] === undefined ||
+        state[yesterday] === undefined
+      ) {
         return {
           ...state,
-          [date]: todosAtDate
+          [date]: todosAtDate,
+          [tomorrow]: todosTomorrow,
+          [yesterday]: todosYesterday
         }
       }
       return state

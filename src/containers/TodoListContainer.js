@@ -4,7 +4,7 @@ import { Filters } from '../actions'
 
 import TodoList from '../components/TodoList'
 
-const TodoListContainer = ({ todos }) => <TodoList todos={todos} />
+const TodoListContainer = ({ todos, date }) => <TodoList todos={todos} />
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -18,9 +18,9 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    todos: getVisibleTodos(state.todosByDate[state.selectedDate], state.filter)
+    todos: getVisibleTodos(state.todosByDate[ownProps.date], state.filter)
   }
 }
 export default connect(mapStateToProps)(TodoListContainer)
