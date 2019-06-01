@@ -1,6 +1,7 @@
 import React from 'react'
 import Cookies from 'universal-cookie'
 import TodoList from './TodoList'
+import TodoBlockHeader from './TodoBlockHeader'
 
 const ShadowTodoBlock = ({ date, onClick }) => {
   const cookies = new Cookies()
@@ -10,7 +11,7 @@ const ShadowTodoBlock = ({ date, onClick }) => {
   return (
     <div className="TodoBlock Shadow" onClick={onClick}>
       <div>
-        <h2>{date}</h2>
+        <TodoBlockHeader date={date} />
         <TodoList todos={todos} />
       </div>
       <div className="ShadowOverlay" />
