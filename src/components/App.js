@@ -55,6 +55,18 @@ class App extends Component {
     })
   }
 
+  getElementsForAnimation = () => {
+    // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
+    const todoBlock = document.querySelectorAll('.TodoBlock')[1]
+    // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
+    const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
+      .children[0]
+    // Tomorrow ShadowTodoBlock is second
+    const tomorrowShadowTodoBlock = document.querySelectorAll('.Shadow')[1]
+      .children[0]
+    return { todoBlock, yesterdayShadowTodoBlock, tomorrowShadowTodoBlock }
+  }
+
   moveEverythingRight = (
     todoBlock,
     yesterdayShadowTodoBlock,
@@ -82,14 +94,12 @@ class App extends Component {
   }
 
   animateMoveRight = () => {
-    // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
-    const todoBlock = document.querySelectorAll('.TodoBlock')[1]
-    // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
-    const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
-      .children[0]
-    // Tomorrow ShadowTodoBlock is second
-    const tomorrowShadowTodoBlock = document.querySelectorAll('.Shadow')[1]
-      .children[0]
+    const {
+      todoBlock,
+      yesterdayShadowTodoBlock,
+      tomorrowShadowTodoBlock
+    } = this.getElementsForAnimation()
+
     const todoBlockOriginalStyle = todoBlock.style
     const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
     const tomorrowShadowOriginalStyle = tomorrowShadowTodoBlock.style
@@ -109,7 +119,7 @@ class App extends Component {
       todoBlock.style.transition = 'all .5s ease-in-out'
       yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const tomorrowClone = document.querySelector('.TomorrowClone')
-      tomorrowClone.style.left = '130%'
+      tomorrowClone.style.left = '110%'
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
@@ -120,14 +130,12 @@ class App extends Component {
   }
 
   animateMoveLeft = () => {
-    // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
-    const todoBlock = document.querySelectorAll('.TodoBlock')[1]
-    // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
-    const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
-      .children[0]
-    // Tomorrow ShadowTodoBlock is second
-    const tomorrowShadowTodoBlock = document.querySelectorAll('.Shadow')[1]
-      .children[0]
+    const {
+      todoBlock,
+      yesterdayShadowTodoBlock,
+      tomorrowShadowTodoBlock
+    } = this.getElementsForAnimation()
+
     const todoBlockOriginalStyle = todoBlock.style
     const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
     const tomorrowShadowOriginalStyle = tomorrowShadowTodoBlock.style
