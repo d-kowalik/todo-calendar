@@ -1,5 +1,6 @@
 import React from 'react'
+import { readableDateFromString } from '../dateHelper'
 
-const TodoBlockHeader = ({ date }) => <h2>{date}</h2>
+const TodoBlockHeader = ({ date }) => <h2>{readableDateFromString(date)}</h2>
 
 export default TodoBlockHeader

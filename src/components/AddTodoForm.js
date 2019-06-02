@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+import { NEW_TODO_STRING } from '../language'
 import '../styles/AddTodoForm.css'
 
 class AddTodoForm extends Component {
@@ -28,7 +29,7 @@ class AddTodoForm extends Component {
             type="text"
             value={this.state.input}
             onChange={this.handleChange}
-            placeholder="New todo"
+            placeholder={NEW_TODO_STRING}
           />
         </form>
       </div>

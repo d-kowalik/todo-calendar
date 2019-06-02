@@ -8,6 +8,8 @@
   padding: 3px;
   background: #ffffff;
   z-index: 1;
+  position: relative;
+  left: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -22,38 +24,36 @@
   padding-left: 0.5%;
 }
 
-.TodoBlock.Shadow {
+.Shadow {
+  transition: all 0.2s;
+}
+
+.Shadow > .TodoBlock {
   transform: scale(0.8);
   z-index: 0;
   position: relative;
-  grid-template-rows: 1fr 12fr;
-  font-size: 1.3em;
 }
 
-.TodoBlock.Shadow li {
-  font-size: 1.25em;
+.Shadow:first-of-type > .TodoBlock {
+  left: 10%;
 }
 
-.TodoBlock.Shadow:first-of-type {
-  right: -10%;
+.Shadow:nth-of-type(2) > .TodoBlock {
+  left: 10%;
 }
 
-.TodoBlock.Shadow:last-of-type {
+.Shadow:nth-of-type(3) > .TodoBlock {
   left: -10%;
 }
 
-.TodoBlock.Shadow h2 {
-  text-align: center;
+.Shadow:last-of-type > .TodoBlock {
+  left: -10%;
 }
 
-.ShadowOverlay {
-  position: absolute;
-  background: lightslategray;
-  width: 100%;
-  height: 100%;
-  opacity: 0.25;
-}
-
-.ShadowOverlay:hover {
+.Shadow:hover {
   cursor: pointer;
+}
+
+.Shadow input {
+  pointer-events: none;
 }

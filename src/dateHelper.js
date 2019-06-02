@@ -1,17 +1,84 @@
+import { PL } from './language'
+
+const englishWeekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+]
+
+const weekdays = !PL
+  ? [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ]
+  : [
+      'Niedziela',
+      'Poniedziałek',
+      'Wtorek',
+      'Środa',
+      'Czwartek',
+      'Piątek',
+      'Sobota'
+    ]
+
+const months = !PL
+  ? [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+  : [
+      'Stycznia',
+      'Lutego',
+      'Marca',
+      'Kwietnia',
+      'Maja',
+      'Czerwca',
+      'Lipca',
+      'Sierpnia',
+      'Września',
+      'Października',
+      'Listopada',
+      'Grudnia'
+    ]
+
 export function assembleDate(date) {
   let day = date.getDate()
   let month = date.getMonth() + 1
   let year = date.getFullYear()
-  let weekdays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-  ]
-  return `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
+
+  return `${englishWeekdays[date.getDay()]}, ${day}-${month}-${year}`
+}
+
+export function readableDateFromString(dateString) {
+  return readableDate(dateStringToDate(dateString))
+}
+
+export function readableDate(date) {
+  let day = date.getDate()
+  let month = date.getMonth()
+
+  return PL
+    ? `${weekdays[date.getDay()]}, ${day} ${months[month]}`
+    : `${weekdays[date.getDay()]}, ${months[month]} ${day}`
 }
 
 export function dateStringToDate(string) {
