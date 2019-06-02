@@ -92,6 +92,7 @@ class App extends Component {
   render() {
     const yesterday = reverseDateByDay(dateStringToDate(this.props.date))
     const tomorrow = advanceDateByDay(dateStringToDate(this.props.date))
+    const beforeYesterday = reverseDateByDay(yesterday)
     let yesterdayShadow = (
       <ShadowTodoBlock
         date={assembleDate(yesterday)}
@@ -125,7 +126,10 @@ class App extends Component {
               transition: 'all 0.5s ease-in-out'
             }}
           >
-            <ShadowTodoBlock {...yesterdayShadow.props} />
+            <ShadowTodoBlock
+              {...yesterdayShadow.props}
+              date={assembleDate(beforeYesterday)}
+            />
           </div>
         ) : null}
         {yesterdayShadow}
