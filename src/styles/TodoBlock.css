@@ -38,6 +38,10 @@
   left: 10%;
 }
 
+.Shadow:nth-of-type(2) > .TodoBlock {
+  left: 10%;
+}
+
 .Shadow:last-of-type > .TodoBlock {
   left: -10%;
 }

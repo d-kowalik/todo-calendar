@@ -49,7 +49,8 @@ class App extends Component {
       initialPositionX: 0,
       currentPositionX: 0,
       beingTouched: false,
-      didSwipe: false
+      didSwipe: false,
+      renderYesterdayTwice: false
     })
   }
 
@@ -61,7 +62,7 @@ class App extends Component {
     yesterdayShadowTodoBlock.style.zIndex = 2
   }
 
-  animateMoveLeft = () => {
+  animateMoveLeft = yesterdayShadowClone => {
     // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
     const todoBlock = document.querySelectorAll('.TodoBlock')[1]
     // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
@@ -69,6 +70,7 @@ class App extends Component {
       .children[0]
     const todoBlockOriginalStyle = todoBlock.style
     const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
+    this.setState({ renderYesterdayTwice: true })
 
     this.moveEverythingRight(todoBlock, yesterdayShadowTodoBlock)
 
@@ -77,16 +79,35 @@ class App extends Component {
       todoBlock.style = todoBlockOriginalStyle
       todoBlock.style = 'transition: all .5s ease-in-out'
       yesterdayShadowTodoBlock.style = 'transition: all .5s ease-in-out'
+      const yesterdayClone = document.querySelector('.YesterdayClone')
+      yesterdayClone.style.left = '-30%'
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
+      this.setState({ renderYesterdayTwice: false })
     }, 510)
   }
 
   render() {
     const yesterday = reverseDateByDay(dateStringToDate(this.props.date))
     const tomorrow = advanceDateByDay(dateStringToDate(this.props.date))
+    let yesterdayShadow = (
+      <ShadowTodoBlock
+        date={assembleDate(yesterday)}
+        onClick={this.props.previousDay}
+      />
+    )
+
+    let tomorrowShadow = (
+      <ShadowTodoBlock
+        date={assembleDate(tomorrow)}
+        onClick={() => {
+          this.props.nextDay()
+          this.animateMoveLeft(React.cloneElement(yesterdayShadow))
+        }}
+      />
+    )
 
     return (
       <div
@@ -95,18 +116,21 @@ class App extends Component {
         onTouchMove={this.handleSwipeMove}
         onTouchEnd={this.handleSwipeEnd}
       >
-        <ShadowTodoBlock
-          date={assembleDate(yesterday)}
-          onClick={this.props.previousDay}
-        />
+        {this.state.renderYesterdayTwice ? (
+          <div
+            className="YesterdayClone"
+            style={{
+              position: 'absolute',
+              left: '-9%',
+              transition: 'all 0.5s ease-in-out'
+            }}
+          >
+            <ShadowTodoBlock {...yesterdayShadow.props} />
+          </div>
+        ) : null}
+        {yesterdayShadow}
         <TodoBlock date={this.props.date} />
-        <ShadowTodoBlock
-          date={assembleDate(tomorrow)}
-          onClick={() => {
-            this.props.nextDay()
-            this.animateMoveLeft()
-          }}
-        />
+        {tomorrowShadow}
       </div>
     )
   }
