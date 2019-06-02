@@ -54,12 +54,17 @@ class App extends Component {
     })
   }
 
-  moveEverythingRight = (todoBlock, yesterdayShadowTodoBlock) => {
+  moveEverythingRight = (
+    todoBlock,
+    yesterdayShadowTodoBlock,
+    tomorrowShadowTodoBlock
+  ) => {
     todoBlock.style.transform = 'scale(0.8)'
     todoBlock.style.left = '40.75%'
     yesterdayShadowTodoBlock.style.transform = 'scale(1)'
     yesterdayShadowTodoBlock.style.left = '100%'
     yesterdayShadowTodoBlock.style.zIndex = 2
+    tomorrowShadowTodoBlock.style.left = '40.75%'
   }
 
   animateMoveLeft = yesterdayShadowClone => {
@@ -68,23 +73,34 @@ class App extends Component {
     // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
     const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
       .children[0]
+    // Tomorrow ShadowTodoBlock is second
+    const tomorrowShadowTodoBlock = document.querySelectorAll('.Shadow')[1]
+      .children[0]
     const todoBlockOriginalStyle = todoBlock.style
     const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
+    const tomorrowShadowOriginalStyle = tomorrowShadowTodoBlock.style
     this.setState({ renderYesterdayTwice: true })
 
-    this.moveEverythingRight(todoBlock, yesterdayShadowTodoBlock)
+    this.moveEverythingRight(
+      todoBlock,
+      yesterdayShadowTodoBlock,
+      tomorrowShadowTodoBlock
+    )
 
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
-      todoBlock.style = 'transition: all .5s ease-in-out'
-      yesterdayShadowTodoBlock.style = 'transition: all .5s ease-in-out'
+      tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
+      tomorrowShadowTodoBlock.style.transition = 'all .5s ease-in-out'
+      todoBlock.style.transition = 'all .5s ease-in-out'
+      yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const yesterdayClone = document.querySelector('.YesterdayClone')
       yesterdayClone.style.left = '-30%'
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
+      tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
       this.setState({ renderYesterdayTwice: false })
     }, 510)
   }
