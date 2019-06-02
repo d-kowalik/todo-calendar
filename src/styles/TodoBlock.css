@@ -12,13 +12,6 @@
   left: 0;
 }
 
-@media only screen and (max-width: 600px) {
-  .TodoBlock {
-    min-width: 95vw;
-    min-height: 100vh;
-  }
-}
-
 .TodoBlock h2 {
   text-align: left;
   padding-left: 0.5%;
@@ -56,4 +49,23 @@
 
 .Shadow input {
   pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .TodoBlock {
+    min-width: 95vw;
+    min-height: 100vh;
+  }
+
+  .Shadow > .TodoBlock {
+    position: absolute;
+  }
+
+  .Shadow:first-of-type > .TodoBlock {
+    right: 0;
+  }
+
+  .Shadow:last-of-type > .TodoBlock {
+    left: 0;
+  }
 }
