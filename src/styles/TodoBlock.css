@@ -17,55 +17,62 @@
   padding-left: 0.5%;
 }
 
-.Shadow {
-  transition: all 0.2s;
-}
+@media only screen and (min-width: 600px) {
+  .Shadow {
+    transition: all 0.2s;
+  }
 
-.Shadow > .TodoBlock {
-  transform: scale(0.8);
-  z-index: 0;
-  position: relative;
-}
+  .Shadow > .TodoBlock {
+    transform: scale(0.8);
+    z-index: 0;
+    position: relative;
+  }
 
-.Shadow:first-of-type > .TodoBlock {
-  left: 10%;
-}
+  .Shadow:first-of-type > .TodoBlock {
+    left: 10%;
+  }
 
-.Shadow:nth-of-type(2) > .TodoBlock {
-  left: 10%;
-}
+  .Shadow:nth-of-type(2) > .TodoBlock {
+    left: 10%;
+  }
 
-.Shadow:nth-of-type(3) > .TodoBlock {
-  left: -10%;
-}
+  .Shadow:nth-of-type(3) > .TodoBlock {
+    left: -10%;
+  }
 
-.Shadow:last-of-type > .TodoBlock {
-  left: -10%;
-}
+  .Shadow:last-of-type > .TodoBlock {
+    left: -10%;
+  }
 
-.Shadow:hover {
-  cursor: pointer;
-}
+  .Shadow:hover {
+    cursor: pointer;
+  }
 
-.Shadow input {
-  pointer-events: none;
+  .Shadow input {
+    pointer-events: none;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .TodoBlock {
     min-width: 95vw;
-    min-height: 100vh;
+    min-height: 99vh;
+    box-shadow: none;
   }
 
-  .Shadow > .TodoBlock {
+  .Shadow {
     position: absolute;
   }
 
-  .Shadow:first-of-type > .TodoBlock {
-    right: 0;
+  .Shadow > .TodoBlock {
+    z-index: 2;
   }
 
-  .Shadow:last-of-type > .TodoBlock {
-    left: 0;
+  .Shadow:first-of-type {
+    right: 100%;
+  }
+
+  .Shadow:last-of-type {
+    left: 100%;
   }
 }
