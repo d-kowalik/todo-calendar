@@ -1,5 +1,15 @@
 import { PL } from './language'
 
+const englishWeekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+]
+
 const weekdays = !PL
   ? [
       'Sunday',
@@ -55,7 +65,7 @@ export function assembleDate(date) {
   let month = date.getMonth() + 1
   let year = date.getFullYear()
 
-  return `${weekdays[date.getDay()]}, ${day}-${month}-${year}`
+  return `${englishWeekdays[date.getDay()]}, ${day}-${month}-${year}`
 }
 
 export function readableDateFromString(dateString) {

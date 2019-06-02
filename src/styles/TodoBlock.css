@@ -30,11 +30,6 @@
   transform: scale(0.8);
   z-index: 0;
   position: relative;
-  font-size: 1.3em;
-}
-
-.Shadow > .TodoBlock li {
-  font-size: 1.25em;
 }
 
 .Shadow:first-of-type > .TodoBlock {
@@ -43,10 +38,6 @@
 
 .Shadow:last-of-type > .TodoBlock {
   left: -10%;
-}
-
-.Shadow > .TodoBlock h2 {
-  text-align: center;
 }
 
 .Shadow:hover {
