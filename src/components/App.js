@@ -16,7 +16,9 @@ class App extends Component {
     initialPositionX: 0,
     currentPositionX: 0,
     beingTouched: false,
-    didSwipe: false
+    didSwipe: false,
+    renderYesterdayTwice: false,
+    renderTomorrowTwice: false
   }
 
   handleSwipeStart = event => {
@@ -49,8 +51,7 @@ class App extends Component {
       initialPositionX: 0,
       currentPositionX: 0,
       beingTouched: false,
-      didSwipe: false,
-      renderYesterdayTwice: false
+      didSwipe: false
     })
   }
 
@@ -67,7 +68,58 @@ class App extends Component {
     tomorrowShadowTodoBlock.style.left = '40.75%'
   }
 
-  animateMoveLeft = yesterdayShadowClone => {
+  moveEverythingLeft = (
+    todoBlock,
+    yesterdayShadowTodoBlock,
+    tomorrowShadowTodoBlock
+  ) => {
+    todoBlock.style.transform = 'scale(0.8)'
+    todoBlock.style.left = '-40.75%'
+    tomorrowShadowTodoBlock.style.transform = 'scale(1)'
+    tomorrowShadowTodoBlock.style.left = '-100%'
+    tomorrowShadowTodoBlock.style.zIndex = 2
+    yesterdayShadowTodoBlock.style.left = '-40.75%'
+  }
+
+  animateMoveRight = () => {
+    // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
+    const todoBlock = document.querySelectorAll('.TodoBlock')[1]
+    // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
+    const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
+      .children[0]
+    // Tomorrow ShadowTodoBlock is second
+    const tomorrowShadowTodoBlock = document.querySelectorAll('.Shadow')[1]
+      .children[0]
+    const todoBlockOriginalStyle = todoBlock.style
+    const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
+    const tomorrowShadowOriginalStyle = tomorrowShadowTodoBlock.style
+    this.setState({ renderTomorrowTwice: true })
+
+    this.moveEverythingLeft(
+      todoBlock,
+      yesterdayShadowTodoBlock,
+      tomorrowShadowTodoBlock
+    )
+
+    setTimeout(() => {
+      yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
+      todoBlock.style = todoBlockOriginalStyle
+      tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
+      tomorrowShadowTodoBlock.style.transition = 'all .5s ease-in-out'
+      todoBlock.style.transition = 'all .5s ease-in-out'
+      yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
+      const tomorrowClone = document.querySelector('.TomorrowClone')
+      tomorrowClone.style.left = '130%'
+    }, 20)
+    setTimeout(() => {
+      yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
+      todoBlock.style = todoBlockOriginalStyle
+      tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
+      this.setState({ renderTomorrowTwice: false })
+    }, 510)
+  }
+
+  animateMoveLeft = () => {
     // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
     const todoBlock = document.querySelectorAll('.TodoBlock')[1]
     // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
@@ -109,10 +161,14 @@ class App extends Component {
     const yesterday = reverseDateByDay(dateStringToDate(this.props.date))
     const tomorrow = advanceDateByDay(dateStringToDate(this.props.date))
     const beforeYesterday = reverseDateByDay(yesterday)
+    const afterTomorrow = advanceDateByDay(tomorrow)
     let yesterdayShadow = (
       <ShadowTodoBlock
         date={assembleDate(yesterday)}
-        onClick={this.props.previousDay}
+        onClick={() => {
+          this.props.previousDay()
+          this.animateMoveRight()
+        }}
       />
     )
 
@@ -151,6 +207,21 @@ class App extends Component {
         {yesterdayShadow}
         <TodoBlock date={this.props.date} />
         {tomorrowShadow}
+        {this.state.renderTomorrowTwice ? (
+          <div
+            className="TomorrowClone"
+            style={{
+              position: 'absolute',
+              left: '72.655%',
+              transition: 'all 0.5s ease-in-out'
+            }}
+          >
+            <ShadowTodoBlock
+              {...tomorrowShadow.props}
+              date={assembleDate(afterTomorrow)}
+            />
+          </div>
+        ) : null}
       </div>
     )
   }
