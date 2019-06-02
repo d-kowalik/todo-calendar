@@ -30,8 +30,18 @@ class App extends Component {
 
   handleSwipeMove = event => {
     if (this.state.beingTouched) {
+      const currentX = event.changedTouches[0].clientX
+      const res = this.state.initialPositionX - currentX
+      if (res < -5) {
+        const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
+        yesterdayShadow.style.right = `${Math.max(100 + res / 5, 0)}%`
+      } else if (res > 5) {
+        const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
+        tomorrowShadow.style.left = `${Math.max(100 - res / 5, 0)}%`
+      }
+
       this.setState({
-        currentPositionX: event.changedTouches[0].clientX,
+        currentPositionX: currentX,
         didSwipe: true
       })
     }
@@ -40,11 +50,31 @@ class App extends Component {
   handleSwipeEnd = event => {
     if (!this.state.didSwipe) return
 
+    const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
+    const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
+
     const res = this.state.initialPositionX - this.state.currentPositionX
     if (res < -80) {
-      this.props.previousDay()
+      yesterdayShadow.style.transition = 'all 0.2s ease-in-out'
+      yesterdayShadow.style.right = '0%'
+      setTimeout(() => {
+        yesterdayShadow.style.transition = 'none'
+        yesterdayShadow.style.right = '100%'
+        this.props.previousDay()
+      }, 200)
     } else if (res > 80) {
-      this.props.nextDay()
+      tomorrowShadow.style.left = '0%'
+      tomorrowShadow.style.transition = 'all 0.2s ease-in-out'
+      setTimeout(() => {
+        tomorrowShadow.style.transition = 'none'
+        tomorrowShadow.style.left = '100%'
+        this.props.nextDay()
+      }, 200)
+    } else {
+      yesterdayShadow.style.transition = 'none'
+      yesterdayShadow.style.right = '100%'
+      tomorrowShadow.style.transition = 'none'
+      tomorrowShadow.style.left = '100%'
     }
 
     this.setState({
