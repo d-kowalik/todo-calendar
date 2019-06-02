@@ -8,6 +8,8 @@
   padding: 3px;
   background: #ffffff;
   z-index: 1;
+  position: relative;
+  left: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -33,7 +35,7 @@
 }
 
 .Shadow:first-of-type > .TodoBlock {
-  right: -10%;
+  left: 10%;
 }
 
 .Shadow:last-of-type > .TodoBlock {

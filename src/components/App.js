@@ -53,7 +53,41 @@ class App extends Component {
     })
   }
 
+  moveEverythingRight = (todoBlock, yesterdayShadowTodoBlock) => {
+    todoBlock.style.transform = 'scale(0.8)'
+    todoBlock.style.left = '40.75%'
+    yesterdayShadowTodoBlock.style.transform = 'scale(1)'
+    yesterdayShadowTodoBlock.style.left = '100%'
+    yesterdayShadowTodoBlock.style.zIndex = 2
+  }
+
+  animateMoveLeft = () => {
+    // First ShadowTodoBlock has first TodoBlock, main TodoBlock is thus second
+    const todoBlock = document.querySelectorAll('.TodoBlock')[1]
+    // Yesterday ShadowTodoBlock is first, and its first children is TodoBlock
+    const yesterdayShadowTodoBlock = document.querySelectorAll('.Shadow')[0]
+      .children[0]
+    const todoBlockOriginalStyle = todoBlock.style
+    const yesterdayShadowOriginalStyle = yesterdayShadowTodoBlock.style
+
+    this.moveEverythingRight(todoBlock, yesterdayShadowTodoBlock)
+
+    setTimeout(() => {
+      yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
+      todoBlock.style = todoBlockOriginalStyle
+      todoBlock.style = 'transition: all .5s ease-in-out'
+      yesterdayShadowTodoBlock.style = 'transition: all .5s ease-in-out'
+    }, 20)
+    setTimeout(() => {
+      yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
+      todoBlock.style = todoBlockOriginalStyle
+    }, 510)
+  }
+
   render() {
+    const yesterday = reverseDateByDay(dateStringToDate(this.props.date))
+    const tomorrow = advanceDateByDay(dateStringToDate(this.props.date))
+
     return (
       <div
         className="App"
@@ -62,17 +96,16 @@ class App extends Component {
         onTouchEnd={this.handleSwipeEnd}
       >
         <ShadowTodoBlock
-          date={assembleDate(
-            reverseDateByDay(dateStringToDate(this.props.date))
-          )}
+          date={assembleDate(yesterday)}
           onClick={this.props.previousDay}
         />
         <TodoBlock date={this.props.date} />
         <ShadowTodoBlock
-          date={assembleDate(
-            advanceDateByDay(dateStringToDate(this.props.date))
-          )}
-          onClick={this.props.nextDay}
+          date={assembleDate(tomorrow)}
+          onClick={() => {
+            this.props.nextDay()
+            this.animateMoveLeft()
+          }}
         />
       </div>
     )
