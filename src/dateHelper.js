@@ -10,17 +10,8 @@ const englishWeekdays = [
   'Saturday'
 ]
 
-const weekdays = !PL
+const weekdays = PL
   ? [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ]
-  : [
       'Niedziela',
       'Poniedziałek',
       'Wtorek',
@@ -29,23 +20,10 @@ const weekdays = !PL
       'Piątek',
       'Sobota'
     ]
+  : englishWeekdays
 
-const months = !PL
+const months = PL
   ? [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
-  : [
       'Stycznia',
       'Lutego',
       'Marca',
@@ -58,6 +36,20 @@ const months = !PL
       'Października',
       'Listopada',
       'Grudnia'
+    ]
+  : [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
     ]
 
 export function assembleDate(date) {
@@ -116,22 +108,7 @@ function addDays(date, amount) {
 }
 
 function removeDays(date, amount) {
-  var tzOff = date.getTimezoneOffset() * 60 * 1000,
-    t = date.getTime(),
-    d = new Date(),
-    tzOff2
-
-  t -= 1000 * 60 * 60 * 24 * amount
-  d.setTime(t)
-
-  tzOff2 = d.getTimezoneOffset() * 60 * 1000
-  if (tzOff !== tzOff2) {
-    var diff = tzOff2 - tzOff
-    t += diff
-    d.setTime(t)
-  }
-
-  return d
+  return addDays(date, -amount)
 }
 
 export const reverseDateByDay = date => {
