@@ -236,10 +236,7 @@ class TodoBlockList extends Component {
               transition: 'all 0.5s ease-in-out'
             }}
           >
-            <ShadowTodoBlock
-              {...yesterdayShadow.props}
-              date={assembleDate(beforeYesterday)}
-            />
+            <ShadowTodoBlock date={assembleDate(beforeYesterday)} />
           </div>
         ) : null}
         {yesterdayShadow}
@@ -254,10 +251,7 @@ class TodoBlockList extends Component {
               transition: 'all 0.5s ease-in-out'
             }}
           >
-            <ShadowTodoBlock
-              {...tomorrowShadow.props}
-              date={assembleDate(afterTomorrow)}
-            />
+            <ShadowTodoBlock date={assembleDate(afterTomorrow)} />
           </div>
         ) : null}
       </div>
