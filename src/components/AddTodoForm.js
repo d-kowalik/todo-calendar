@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
 import { NEW_TODO_STRING } from '../language'
 import '../styles/AddTodoForm.css'
 
@@ -37,15 +35,4 @@ class AddTodoForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTodo: body => {
-      dispatch(addTodo(body))
-    }
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(AddTodoForm)
+export default AddTodoForm
