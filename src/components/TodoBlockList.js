@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../styles/App.css'
+import '../styles/TodoBlockList.css'
 import ShadowTodoBlock from './ShadowTodoBlock'
 import TodoBlock from './TodoBlock'
 import { connect } from 'react-redux'
@@ -222,7 +222,7 @@ class TodoBlockList extends Component {
 
     return (
       <div
-        className="App"
+        className="TodoBlockList"
         onTouchStart={this.handleSwipeStart}
         onTouchMove={this.handleSwipeMove}
         onTouchEnd={this.handleSwipeEnd}
