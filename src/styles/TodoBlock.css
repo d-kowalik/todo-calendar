@@ -35,19 +35,19 @@
   }
 
   .Shadow:first-of-type > .TodoBlock {
-    left: 10%;
+    left: 20%;
   }
 
   .Shadow:nth-of-type(2) > .TodoBlock {
-    left: 10%;
+    left: 20%;
   }
 
   .Shadow:nth-of-type(3) > .TodoBlock {
-    left: -10%;
+    left: -20%;
   }
 
   .Shadow:last-of-type > .TodoBlock {
-    left: -10%;
+    left: -20%;
   }
 
   .Shadow:hover {

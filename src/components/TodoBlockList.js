@@ -103,11 +103,11 @@ class TodoBlockList extends Component {
     tomorrowShadowTodoBlock
   ) => {
     todoBlock.style.transform = 'scale(0.8)'
-    todoBlock.style.left = '40.75%'
+    todoBlock.style.left = '36.21%'
     yesterdayShadowTodoBlock.style.transform = 'scale(1)'
     yesterdayShadowTodoBlock.style.left = '100%'
     yesterdayShadowTodoBlock.style.zIndex = 2
-    tomorrowShadowTodoBlock.style.left = '40.75%'
+    tomorrowShadowTodoBlock.style.left = '36.21%'
   }
 
   moveEverythingLeft = (
@@ -116,11 +116,11 @@ class TodoBlockList extends Component {
     tomorrowShadowTodoBlock
   ) => {
     todoBlock.style.transform = 'scale(0.8)'
-    todoBlock.style.left = '-40.75%'
+    todoBlock.style.left = '-36.21%'
     tomorrowShadowTodoBlock.style.transform = 'scale(1)'
     tomorrowShadowTodoBlock.style.left = '-100%'
     tomorrowShadowTodoBlock.style.zIndex = 2
-    yesterdayShadowTodoBlock.style.left = '-40.75%'
+    yesterdayShadowTodoBlock.style.left = '-36.21%'
   }
 
   animateMoveRight = () => {
@@ -232,7 +232,7 @@ class TodoBlockList extends Component {
             className="YesterdayClone"
             style={{
               position: 'absolute',
-              left: '-9%',
+              left: '.2%',
               transition: 'all 0.5s ease-in-out'
             }}
           >
