@@ -5,6 +5,7 @@ import MonthBlock from './MonthBlock'
 
 const App = () => (
   <div className="App">
+    <TodoBlockList />
     <MonthBlock />
   </div>
 )
