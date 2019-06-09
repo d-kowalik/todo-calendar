@@ -22,6 +22,21 @@ const weekdays = PL
     ]
   : englishWeekdays
 
+const englishMonths = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+
 const months = PL
   ? [
       'Stycznia',
@@ -37,20 +52,7 @@ const months = PL
       'Listopada',
       'Grudnia'
     ]
-  : [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
+  : englishMonths
 
 export function assembleDate(date) {
   let day = date.getDate()
@@ -58,6 +60,24 @@ export function assembleDate(date) {
   let year = date.getFullYear()
 
   return `${englishWeekdays[date.getDay()]}, ${day}-${month}-${year}`
+}
+
+export function getMonthNameEng(id) {
+  return englishMonths[id]
+}
+
+export function getMonthDateEng(date) {
+  let month = date.getMonth()
+  let year = date.getFullYear()
+
+  return `${englishMonths[month]} ${year}`
+}
+
+export function getMonthDate(date) {
+  let month = date.getMonth()
+  let year = date.getFullYear()
+
+  return `${months[month]} ${year}`
 }
 
 export function readableDateFromString(dateString) {
