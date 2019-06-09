@@ -4,7 +4,7 @@ import { selectedDate } from './selectedDateReducer'
 import { TOGGLE_MONTH_SELECTED } from '../actions'
 import { getMonthDateEng } from '../dateHelper'
 
-function isMonthSelected(state = false, action) {
+function isMonthSelected(state = true, action) {
   switch (action.type) {
     case TOGGLE_MONTH_SELECTED:
       return !state
@@ -21,8 +21,14 @@ export const rootReducer = (state = {}, action) => {
   const date = selectedDate(state.selectedDate, action)
   const isMonthSelectedCpy = isMonthSelected(state.isMonthSelected, action)
   const selectedMonthCpy = selectedMonth(state.selectedMonth, action)
+  const dateToPass = isMonthSelectedCpy ? selectedMonthCpy : date
   return {
-    todosByDate: todosByDate(state.todosByDate, action, date),
+    todosByDate: todosByDate(
+      state.todosByDate,
+      action,
+      dateToPass,
+      isMonthSelectedCpy
+    ),
     filter: filter(state.filter, action),
     selectedDate: date,
     isMonthSelected: isMonthSelectedCpy,
