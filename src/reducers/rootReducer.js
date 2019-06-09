@@ -4,7 +4,7 @@ import { selectedDate } from './selectedDateReducer'
 import { TOGGLE_MONTH_SELECTED } from '../actions'
 import { getMonthDateEng } from '../dateHelper'
 
-function isMonthSelected(state = true, action) {
+function isMonthSelected(state = false, action) {
   switch (action.type) {
     case TOGGLE_MONTH_SELECTED:
       return !state
