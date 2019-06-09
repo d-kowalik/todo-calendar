@@ -1,15 +1,22 @@
 import React from 'react'
-import AddTodoForm from './AddTodoForm'
+import AddTodoFormContainer from '../containers/AddTodoContainer'
 import TodoList from './TodoList'
+import { connect } from 'react-redux'
 
-const MonthBlock = props => {
+const MonthBlock = ({ todos }) => {
   return (
     <div className="MonthBlock">
       <h2>Month</h2>
-      <AddTodoForm addTodo={null} />
-      <TodoList todos={null} />
+      <AddTodoFormContainer />
+      <TodoList todos={todos} />
     </div>
   )
 }
 
-export default MonthBlock
+const mapStateToProps = state => {
+  return {
+    todos: state.todosByDate[state.selectedMonth]
+  }
+}
+
+export default connect(mapStateToProps)(MonthBlock)
