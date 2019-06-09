@@ -54,6 +54,23 @@ const months = PL
     ]
   : englishMonths
 
+const normalMonths = PL
+  ? [
+      'Styczeń',
+      'Luty',
+      'Marzec',
+      'Kwiecien',
+      'Maj',
+      'Czerwiec',
+      'Lipiec',
+      'Sierpień',
+      'Wrzesień',
+      'Październik',
+      'Listopad',
+      'Grudzień'
+    ]
+  : englishMonths
+
 export function assembleDate(date) {
   let day = date.getDate()
   let month = date.getMonth() + 1
@@ -71,6 +88,13 @@ export function getMonthDateEng(date) {
   let year = date.getFullYear()
 
   return `${englishMonths[month]} ${year}`
+}
+
+export function readableMonthDateFromMonthDateEng(date) {
+  let month = date.split(' ')[0]
+  let year = date.split(' ')[1]
+  let index = englishMonths.indexOf(month)
+  return `${normalMonths[index]} ${year}`
 }
 
 export function getMonthDate(date) {
