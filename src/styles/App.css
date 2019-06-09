@@ -2,8 +2,31 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  align-items: center;
   background: #f5fffa;
   overflow: hidden;
   position: relative;
   flex-direction: column;
+}
+
+.Block {
+  height: 55vh;
+  min-width: 45vw;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: grid;
+  grid-template-rows: 1fr 1fr 10fr 1fr;
+  border-radius: 6px;
+  padding: 3px;
+  background: #ffffff;
+}
+
+.MonthBlock {
+  z-index: 0;
+  min-width: 90vw;
+  position: relative;
+}
+
+.TodoBlockList {
+  z-index: 2;
+  position: relative;
 }

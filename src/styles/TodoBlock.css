@@ -1,12 +1,4 @@
 .TodoBlock {
-  height: 65vh;
-  min-width: 45vw;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  display: grid;
-  grid-template-rows: 1fr 1fr 10fr 1fr;
-  border-radius: 6px;
-  padding: 3px;
-  background: #ffffff;
   z-index: 1;
   position: relative;
   left: 0;

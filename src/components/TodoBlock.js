@@ -6,7 +6,7 @@ import VisibilityFilters from './VisibilityFilters'
 import '../styles/TodoBlock.css'
 
 const TodoBlock = ({ date }) => (
-  <div className="TodoBlock">
+  <div className="TodoBlock Block">
     <TodoBlockHeader date={date} />
     <AddTodoContainer />
     <TodoListContainer date={date} />

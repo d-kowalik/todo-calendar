@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const MonthBlock = ({ todos }) => {
   return (
-    <div className="MonthBlock">
+    <div className="MonthBlock Block">
       <h2>Month</h2>
       <AddTodoFormContainer />
       <TodoList todos={todos} />
