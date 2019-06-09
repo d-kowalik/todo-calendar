@@ -2,7 +2,7 @@ import { filter } from './filterReducer'
 import { todosByDate } from './todosByDateReducer'
 import { selectedDate } from './selectedDateReducer'
 import { TOGGLE_MONTH_SELECTED } from '../actions'
-import { today, getMonthDateEng } from '../dateHelper'
+import { getMonthDateEng } from '../dateHelper'
 
 function isMonthSelected(state = false, action) {
   switch (action.type) {
@@ -13,7 +13,7 @@ function isMonthSelected(state = false, action) {
   }
 }
 
-function selectedMonth(state = getMonthDateEng(today()), action) {
+function selectedMonth(state = getMonthDateEng(new Date()), action) {
   return state
 }
 
