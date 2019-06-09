@@ -19,7 +19,7 @@ function selectedMonth(state = getMonthDateEng(today()), action) {
 
 export const rootReducer = (state = {}, action) => {
   const date = selectedDate(state.selectedDate, action)
-  const isMonthSelectedCpy = isMonthSelected(state.monthSelected, action)
+  const isMonthSelectedCpy = isMonthSelected(state.isMonthSelected, action)
   const selectedMonthCpy = selectedMonth(state.selectedMonth, action)
   return {
     todosByDate: todosByDate(state.todosByDate, action, date),
