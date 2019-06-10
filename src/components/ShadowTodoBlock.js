@@ -12,8 +12,6 @@ const ShadowTodoBlock = ({ date, onClick, todos }) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state)
-
   return {
     todos: state.todosByDate[ownProps.date]
   }
