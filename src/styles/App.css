@@ -20,6 +20,11 @@
   background: #ffffff;
 }
 
+.Block h2 {
+  text-align: left;
+  padding-left: 0.5%;
+}
+
 .MonthBlock {
   z-index: 0;
   min-width: 90vw;

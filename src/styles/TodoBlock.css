@@ -4,11 +4,6 @@
   left: 0;
 }
 
-.TodoBlock h2 {
-  text-align: left;
-  padding-left: 0.5%;
-}
-
 @media only screen and (min-width: 600px) {
   .Shadow {
     transition: all 0.2s;
