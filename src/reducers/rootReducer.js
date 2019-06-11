@@ -1,7 +1,11 @@
 import { filter } from './filterReducer'
 import { todosByDate } from './todosByDateReducer'
 import { selectedDate } from './selectedDateReducer'
-import { TOGGLE_MONTH_SELECTED, SET_MONTH_SELECTED } from '../actions'
+import {
+  TOGGLE_MONTH_SELECTED,
+  SET_MONTH_SELECTED,
+  SET_CORRECT_MONTH_STATE
+} from '../actions'
 import { getMonthDateEng } from '../dateHelper'
 
 function isMonthSelected(state = false, action) {
@@ -10,6 +14,12 @@ function isMonthSelected(state = false, action) {
       return !state
     case SET_MONTH_SELECTED:
       return action.value
+    case SET_CORRECT_MONTH_STATE:
+      const e = action.event
+      // Get the main MonthBlock
+      const parent = document.querySelectorAll('.MonthBlock.Main')[0]
+      // If true, that means an item inside the main MonthBlock was clicked, so isMonthSelected should be true
+      return e.target !== parent && parent.contains(e.target)
     default:
       return state
   }
