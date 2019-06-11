@@ -13,26 +13,40 @@ const saveTodosToCookies = (todos, date) => {
   cookies.set(date, todos)
 }
 
-const getStateFromCookies = date => {
+const getTodosFromCookies = date => {
   return cookies.get(date) === undefined ? [] : cookies.get(date)
 }
 
-export const todosByDate = (state = {}, action, date) => {
+function nextDate(monthSelected, date) {
+  if (monthSelected) {
+  } else {
+    return assembleDate(advanceDateByDay(dateStringToDate(date)))
+  }
+}
+
+function prevDate(monthSelected, date) {
+  if (monthSelected) {
+  } else {
+    return assembleDate(reverseDateByDay(dateStringToDate(date)))
+  }
+}
+
+export const todosByDate = (state = {}, action, date, isMonthSelected) => {
   let todosAtDate = state[date]
   if (todosAtDate === undefined) {
-    todosAtDate = getStateFromCookies(date)
+    todosAtDate = getTodosFromCookies(date)
   }
 
-  let tomorrow = assembleDate(advanceDateByDay(dateStringToDate(date)))
+  let tomorrow = nextDate(isMonthSelected, date)
   let todosTomorrow = state[tomorrow]
   if (todosTomorrow === undefined) {
-    todosTomorrow = getStateFromCookies(tomorrow)
+    todosTomorrow = getTodosFromCookies(tomorrow)
   }
 
-  let yesterday = assembleDate(reverseDateByDay(dateStringToDate(date)))
+  let yesterday = prevDate(isMonthSelected, date)
   let todosYesterday = state[yesterday]
   if (todosYesterday === undefined) {
-    todosYesterday = getStateFromCookies(yesterday)
+    todosYesterday = getTodosFromCookies(yesterday)
   }
 
   let nextId =

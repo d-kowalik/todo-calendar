@@ -6,8 +6,11 @@ import * as serviceWorker from './serviceWorker'
 import { createStore } from 'redux'
 import { rootReducer } from './reducers/rootReducer'
 import { Provider } from 'react-redux'
+import { toggleMonthSelected } from './actions'
 
 const store = createStore(rootReducer)
+store.dispatch(toggleMonthSelected())
+store.dispatch(toggleMonthSelected())
 
 ReactDOM.render(
   <Provider store={store}>

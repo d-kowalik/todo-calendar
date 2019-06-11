@@ -1,0 +1,11 @@
+.TodoBlockList {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5fffa;
+  position: relative;
+  margin-top: 1%;
+}

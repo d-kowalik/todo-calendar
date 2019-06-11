@@ -10,17 +10,8 @@ const englishWeekdays = [
   'Saturday'
 ]
 
-const weekdays = !PL
+const weekdays = PL
   ? [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ]
-  : [
       'Niedziela',
       'Poniedziałek',
       'Wtorek',
@@ -29,23 +20,25 @@ const weekdays = !PL
       'Piątek',
       'Sobota'
     ]
+  : englishWeekdays
 
-const months = !PL
+const englishMonths = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
+
+const months = PL
   ? [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
-  : [
       'Stycznia',
       'Lutego',
       'Marca',
@@ -59,6 +52,24 @@ const months = !PL
       'Listopada',
       'Grudnia'
     ]
+  : englishMonths
+
+const normalMonths = PL
+  ? [
+      'Styczeń',
+      'Luty',
+      'Marzec',
+      'Kwiecien',
+      'Maj',
+      'Czerwiec',
+      'Lipiec',
+      'Sierpień',
+      'Wrzesień',
+      'Październik',
+      'Listopad',
+      'Grudzień'
+    ]
+  : englishMonths
 
 export function assembleDate(date) {
   let day = date.getDate()
@@ -66,6 +77,31 @@ export function assembleDate(date) {
   let year = date.getFullYear()
 
   return `${englishWeekdays[date.getDay()]}, ${day}-${month}-${year}`
+}
+
+export function getMonthNameEng(id) {
+  return englishMonths[id]
+}
+
+export function getMonthDateEng(date) {
+  let month = date.getMonth()
+  let year = date.getFullYear()
+
+  return `${englishMonths[month]} ${year}`
+}
+
+export function readableMonthDateFromMonthDateEng(date) {
+  let month = date.split(' ')[0]
+  let year = date.split(' ')[1]
+  let index = englishMonths.indexOf(month)
+  return `${normalMonths[index]} ${year}`
+}
+
+export function getMonthDate(date) {
+  let month = date.getMonth()
+  let year = date.getFullYear()
+
+  return `${months[month]} ${year}`
 }
 
 export function readableDateFromString(dateString) {
@@ -116,22 +152,7 @@ function addDays(date, amount) {
 }
 
 function removeDays(date, amount) {
-  var tzOff = date.getTimezoneOffset() * 60 * 1000,
-    t = date.getTime(),
-    d = new Date(),
-    tzOff2
-
-  t -= 1000 * 60 * 60 * 24 * amount
-  d.setTime(t)
-
-  tzOff2 = d.getTimezoneOffset() * 60 * 1000
-  if (tzOff !== tzOff2) {
-    var diff = tzOff2 - tzOff
-    t += diff
-    d.setTime(t)
-  }
-
-  return d
+  return addDays(date, -amount)
 }
 
 export const reverseDateByDay = date => {

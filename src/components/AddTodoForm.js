@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
 import { NEW_TODO_STRING } from '../language'
 import '../styles/AddTodoForm.css'
 
@@ -11,7 +9,7 @@ class AddTodoForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.addTodo(this.state.input)
+    this.props.onAdd(e, this.state.input)
     this.setState({ input: '' })
   }
 
@@ -37,15 +35,4 @@ class AddTodoForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTodo: body => {
-      dispatch(addTodo(body))
-    }
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(AddTodoForm)
+export default AddTodoForm

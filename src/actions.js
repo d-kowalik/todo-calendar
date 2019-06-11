@@ -4,6 +4,8 @@ export const CHANGE_FILTER = 'CHANGE_FILTER'
 export const DELETE_TODO = 'DELETE_TODO'
 export const ADVANCE_DAY = 'ADVANCE_DAY'
 export const REVERSE_DAY = 'REVERSE_DAY'
+export const TOGGLE_MONTH_SELECTED = 'TOGGLE_MONTH_SELECTED'
+export const SET_MONTH_SELECTED = 'SET_MONTH_SELECTED'
 
 export const Filters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -48,5 +50,18 @@ export function advanceDay() {
 export function reverseDay() {
   return {
     type: REVERSE_DAY
+  }
+}
+
+export function toggleMonthSelected() {
+  return {
+    type: TOGGLE_MONTH_SELECTED
+  }
+}
+
+export function setMonthSelected(value) {
+  return {
+    type: SET_MONTH_SELECTED,
+    value
   }
 }

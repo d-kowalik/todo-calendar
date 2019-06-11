@@ -1,9 +1,10 @@
 import React from 'react'
-import Todo from '../components/Todo'
-import { toggleTodo, deleteTodo, setMonthSelected } from '../actions'
+import { addTodo, setMonthSelected } from '../actions'
 import { connect } from 'react-redux'
 
-class TodoContainer extends React.Component {
+import AddTodoForm from '../components/AddTodoForm'
+
+class AddTodoContainer extends React.Component {
   setCorrectMonthState = e => {
     // Get the main MonthBlock
     const parent = document.querySelectorAll('.MonthBlock.Main')[0]
@@ -16,35 +17,20 @@ class TodoContainer extends React.Component {
     }
   }
 
-  onLiClick = (e, id) => {
+  onAdd = (e, input) => {
     this.setCorrectMonthState(e)
-    this.props.toggleTodo(id)
-  }
-
-  onDelete = (e, id) => {
-    this.setCorrectMonthState(e)
-    this.props.deleteTodo(id)
+    this.props.addTodo(input)
   }
 
   render() {
-    return (
-      <Todo
-        todo={this.props.todo}
-        onLiClick={this.onLiClick}
-        onDelete={this.onDelete}
-      />
-    )
+    return <AddTodoForm onAdd={this.onAdd} />
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleTodo: id => {
-      console.log('toggle')
-      dispatch(toggleTodo(id))
-    },
-    deleteTodo: id => {
-      dispatch(deleteTodo(id))
+    addTodo: body => {
+      dispatch(addTodo(body))
     },
     enableMonthSelected: () => dispatch(setMonthSelected(true)),
     disableMonthSelected: () => dispatch(setMonthSelected(false))
@@ -54,4 +40,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(TodoContainer)
+)(AddTodoContainer)
