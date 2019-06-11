@@ -6,7 +6,7 @@ import MonthBlock from './MonthBlock'
 const App = () => (
   <div className="App">
     <TodoBlockList />
-    <MonthBlock />
+    <MonthBlock isMain={true} />
   </div>
 )
 export default App

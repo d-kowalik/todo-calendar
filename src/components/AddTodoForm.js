@@ -9,7 +9,7 @@ class AddTodoForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.addTodo(this.state.input)
+    this.props.onAdd(e, this.state.input)
     this.setState({ input: '' })
   }
 

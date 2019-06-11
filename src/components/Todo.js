@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Todo = ({ todo, toggleTodo, deleteTodo }) => (
+const Todo = ({ todo, onLiClick, onDelete }) => (
   <li
     className={todo.completed ? 'completed' : ''}
-    onClick={() => toggleTodo(todo.id)}
+    onClick={e => onLiClick(e, todo.id)}
   >
     <p>{todo.body}</p>
-    <button type="button" className="flat" onClick={() => deleteTodo(todo.id)}>
+    <button type="button" className="flat" onClick={e => onDelete(e, todo.id)}>
       X
     </button>
   </li>
