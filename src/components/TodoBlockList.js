@@ -3,6 +3,7 @@ import '../styles/TodoBlockList.css'
 import ShadowTodoBlock from './ShadowTodoBlock'
 import TodoBlock from './TodoBlock'
 import { connect } from 'react-redux'
+import { reverseDay, advanceDay } from '../actions'
 import {
   advanceDateByDay,
   reverseDateByDay,
@@ -191,4 +192,14 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(TodoBlockList)
+const mapDispatchToProps = dispatch => {
+  return {
+    previousDay: () => dispatch(reverseDay()),
+    nextDay: () => dispatch(advanceDay())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoBlockList)
