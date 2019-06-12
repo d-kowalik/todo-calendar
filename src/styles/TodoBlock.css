@@ -47,10 +47,14 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .TodoBlock {
+  .Block {
     min-width: 95vw;
     min-height: 99vh;
     box-shadow: none;
+  }
+
+  .MonthBlock {
+    z-index: 3;
   }
 
   .Shadow {
