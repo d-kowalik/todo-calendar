@@ -44,6 +44,24 @@
   .Shadow input {
     pointer-events: none;
   }
+
+  .Shadow > .TodoBlock > .TodoList > li > p {
+    margin: auto;
+    font-size: 1.5em;
+  }
+
+  .Shadow > .TodoBlock > h2 {
+    margin: auto;
+    font-size: 2em;
+  }
+
+  .Shadow > .TodoBlock > .AddTodoForm {
+    opacity: 0;
+  }
+
+  .Shadow > .TodoBlock > .VisibilityFilters {
+    opacity: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
