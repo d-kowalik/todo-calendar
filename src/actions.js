@@ -6,6 +6,7 @@ export const ADVANCE_DAY = 'ADVANCE_DAY'
 export const REVERSE_DAY = 'REVERSE_DAY'
 export const TOGGLE_MONTH_SELECTED = 'TOGGLE_MONTH_SELECTED'
 export const SET_MONTH_SELECTED = 'SET_MONTH_SELECTED'
+export const SET_CORRECT_MONTH_STATE = 'SET_CORRECT_MONTH_STATE'
 
 export const Filters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -63,5 +64,11 @@ export function setMonthSelected(value) {
   return {
     type: SET_MONTH_SELECTED,
     value
+  }
+}
+export function setCorrectMonthState(event) {
+  return {
+    type: SET_CORRECT_MONTH_STATE,
+    event
   }
 }

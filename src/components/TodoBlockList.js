@@ -13,76 +13,8 @@ import {
 
 class TodoBlockList extends Component {
   state = {
-    initialPositionX: 0,
-    currentPositionX: 0,
-    beingTouched: false,
-    didSwipe: false,
     renderYesterdayTwice: false,
     renderTomorrowTwice: false
-  }
-
-  handleSwipeStart = event => {
-    this.setState({
-      initialPositionX: event.changedTouches[0].clientX,
-      beingTouched: true
-    })
-  }
-
-  handleSwipeMove = event => {
-    if (this.state.beingTouched) {
-      const currentX = event.changedTouches[0].clientX
-      const res = this.state.initialPositionX - currentX
-      if (res < -5) {
-        const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
-        yesterdayShadow.style.right = `${Math.max(100 + res / 5, 0)}%`
-      } else if (res > 5) {
-        const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
-        tomorrowShadow.style.left = `${Math.max(100 - res / 5, 0)}%`
-      }
-
-      this.setState({
-        currentPositionX: currentX,
-        didSwipe: true
-      })
-    }
-  }
-
-  handleSwipeEnd = event => {
-    if (!this.state.didSwipe) return
-
-    const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
-    const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
-
-    const res = this.state.initialPositionX - this.state.currentPositionX
-    if (res < -80) {
-      yesterdayShadow.style.transition = 'all 0.2s ease-in-out'
-      yesterdayShadow.style.right = '0%'
-      setTimeout(() => {
-        yesterdayShadow.style.transition = 'none'
-        yesterdayShadow.style.right = '100%'
-        this.props.previousDay()
-      }, 200)
-    } else if (res > 80) {
-      tomorrowShadow.style.left = '0%'
-      tomorrowShadow.style.transition = 'all 0.2s ease-in-out'
-      setTimeout(() => {
-        tomorrowShadow.style.transition = 'none'
-        tomorrowShadow.style.left = '100%'
-        this.props.nextDay()
-      }, 200)
-    } else {
-      yesterdayShadow.style.transition = 'none'
-      yesterdayShadow.style.right = '100%'
-      tomorrowShadow.style.transition = 'none'
-      tomorrowShadow.style.left = '100%'
-    }
-
-    this.setState({
-      initialPositionX: 0,
-      currentPositionX: 0,
-      beingTouched: false,
-      didSwipe: false
-    })
   }
 
   getElementsForAnimation = () => {
@@ -141,6 +73,9 @@ class TodoBlockList extends Component {
       tomorrowShadowTodoBlock
     )
 
+    tomorrowShadowTodoBlock.parentElement.classList.remove('Shadow')
+    todoBlock.classList.add('SideBlock')
+
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
@@ -150,12 +85,16 @@ class TodoBlockList extends Component {
       yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const tomorrowClone = document.querySelector('.TomorrowClone')
       tomorrowClone.style.left = '110%'
+      tomorrowShadowTodoBlock.parentElement.classList.add('Shadow')
+      todoBlock.classList.add('SideAnim')
+      todoBlock.classList.remove('SideBlock')
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
       tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
       this.setState({ renderTomorrowTwice: false })
+      todoBlock.classList.remove('SideAnim')
     }, 510)
   }
 
@@ -177,6 +116,9 @@ class TodoBlockList extends Component {
       tomorrowShadowTodoBlock
     )
 
+    yesterdayShadowTodoBlock.parentElement.classList.remove('Shadow')
+    todoBlock.classList.add('SideBlock')
+
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
@@ -186,12 +128,16 @@ class TodoBlockList extends Component {
       yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const yesterdayClone = document.querySelector('.YesterdayClone')
       yesterdayClone.style.left = '-30%'
+      yesterdayShadowTodoBlock.parentElement.classList.add('Shadow')
+      todoBlock.classList.add('SideAnim')
+      todoBlock.classList.remove('SideBlock')
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
       tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
       this.setState({ renderYesterdayTwice: false })
+      todoBlock.classList.remove('SideAnim')
     }, 510)
   }
 
@@ -221,12 +167,7 @@ class TodoBlockList extends Component {
     )
 
     return (
-      <div
-        className="TodoBlockList"
-        onTouchStart={this.handleSwipeStart}
-        onTouchMove={this.handleSwipeMove}
-        onTouchEnd={this.handleSwipeEnd}
-      >
+      <div className="TodoBlockList">
         {this.state.renderYesterdayTwice ? (
           <div
             className="YesterdayClone"

@@ -14,6 +14,7 @@
     z-index: 0;
     position: relative;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    pointer-events: none;
   }
 
   .Shadow > .TodoBlock:hover {
@@ -44,13 +45,95 @@
   .Shadow input {
     pointer-events: none;
   }
+
+  .TodoBlock > .TodoList > li > p {
+    margin: 0;
+    font-size: 1em;
+    text-align: left;
+    width: 0;
+    white-space: nowrap;
+  }
+
+  .TodoBlock > h2 {
+    margin: 0;
+    font-size: 1.6em;
+  }
+
+  .TodoBlock > .AddTodoForm,
+  .TodoBlock > .VisibilityFilters {
+    opacity: 1;
+  }
+
+  .Shadow > .TodoBlock > .TodoList > li > p,
+  .SideBlock > .TodoList > li > p {
+    width: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 1.5em;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .SideBlock > .TodoList > li > p {
+    transition: none;
+  }
+
+  .SideAnim > .TodoList > li > p {
+    transition: all 0.5s ease-in-out;
+  }
+
+  .Shadow > .TodoBlock > h2,
+  .SideBlock > h2 {
+    margin-left: 33%;
+    font-size: 2em;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .SideBlock > h2 {
+    transition: none;
+  }
+
+  .SideAnim > h2 {
+    transition: all 0.5s ease-in-out;
+  }
+
+  .Shadow > .TodoBlock > .AddTodoForm,
+  .SideBlock .AddTodoForm {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .SideBlock .AddTodoForm {
+    transition: none;
+  }
+
+  .SideAnim .AddTodoForm {
+    transition: all 0.5s ease-in-out;
+  }
+
+  .Shadow > .TodoBlock > .VisibilityFilters,
+  .SideBlock > .VisibilityFilters {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .SideBlock > .VisibilityFilters {
+    transition: none;
+  }
+
+  .SideAnim > .VisibilityFilters {
+    transition: all 0.5s ease-in-out;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-  .TodoBlock {
+  .Block {
     min-width: 95vw;
     min-height: 99vh;
     box-shadow: none;
+  }
+
+  .MonthBlock {
+    z-index: 3;
   }
 
   .Shadow {
