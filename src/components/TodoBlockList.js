@@ -73,6 +73,9 @@ class TodoBlockList extends Component {
       tomorrowShadowTodoBlock
     )
 
+    tomorrowShadowTodoBlock.parentElement.classList.remove('Shadow')
+    todoBlock.classList.add('SideBlock')
+
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
@@ -82,12 +85,16 @@ class TodoBlockList extends Component {
       yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const tomorrowClone = document.querySelector('.TomorrowClone')
       tomorrowClone.style.left = '110%'
+      tomorrowShadowTodoBlock.parentElement.classList.add('Shadow')
+      todoBlock.classList.add('SideAnim')
+      todoBlock.classList.remove('SideBlock')
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
       tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
       this.setState({ renderTomorrowTwice: false })
+      todoBlock.classList.remove('SideAnim')
     }, 510)
   }
 
@@ -109,6 +116,9 @@ class TodoBlockList extends Component {
       tomorrowShadowTodoBlock
     )
 
+    yesterdayShadowTodoBlock.parentElement.classList.remove('Shadow')
+    todoBlock.classList.add('SideBlock')
+
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
@@ -118,12 +128,16 @@ class TodoBlockList extends Component {
       yesterdayShadowTodoBlock.style.transition = 'all .5s ease-in-out'
       const yesterdayClone = document.querySelector('.YesterdayClone')
       yesterdayClone.style.left = '-30%'
+      yesterdayShadowTodoBlock.parentElement.classList.add('Shadow')
+      todoBlock.classList.add('SideAnim')
+      todoBlock.classList.remove('SideBlock')
     }, 20)
     setTimeout(() => {
       yesterdayShadowTodoBlock.style = yesterdayShadowOriginalStyle
       todoBlock.style = todoBlockOriginalStyle
       tomorrowShadowTodoBlock.style = tomorrowShadowOriginalStyle
       this.setState({ renderYesterdayTwice: false })
+      todoBlock.classList.remove('SideAnim')
     }, 510)
   }
 
