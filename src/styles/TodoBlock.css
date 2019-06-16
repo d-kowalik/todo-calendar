@@ -47,9 +47,8 @@
   }
 
   .TodoBlock > .TodoList > li > p {
-    margin: 0;
+    margin: 10px;
     font-size: 1em;
-    text-align: left;
     width: 0;
     white-space: nowrap;
   }
@@ -67,7 +66,6 @@
   .Shadow > .TodoBlock > .TodoList > li > p,
   .SideBlock > .TodoList > li > p {
     width: 0;
-    text-align: center;
     width: 100%;
     font-size: 1.5em;
     transition: all 0.5s ease-in-out;
