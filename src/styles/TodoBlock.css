@@ -130,6 +130,10 @@
     box-shadow: none;
   }
 
+  .TodoBlock > .TodoList > li {
+    max-height: 10%;
+  }
+
   .MonthBlock {
     z-index: 3;
   }
