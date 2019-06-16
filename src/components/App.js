@@ -44,6 +44,13 @@ class App extends Component {
     }
   }
 
+  resetSideDays(yesterdayShadow, tomorrowShadow) {
+    yesterdayShadow.style.transition = 'none'
+    yesterdayShadow.style.right = '100%'
+    tomorrowShadow.style.transition = 'none'
+    tomorrowShadow.style.left = '100%'
+  }
+
   handleSwipeEnd = event => {
     if (!this.state.didSwipe) return
 
@@ -71,19 +78,16 @@ class App extends Component {
         this.props.nextDay()
       }, 200)
     } else if (resY > 80) {
+      this.resetSideDays(yesterdayShadow, tomorrowShadow)
       // Display month
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.top = '-100%'
     } else if (resY < -80) {
-      console.log('lol')
-
+      this.resetSideDays(yesterdayShadow, tomorrowShadow)
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.top = '0'
     } else {
-      yesterdayShadow.style.transition = 'none'
-      yesterdayShadow.style.right = '100%'
-      tomorrowShadow.style.transition = 'none'
-      tomorrowShadow.style.left = '100%'
+      this.resetSideDays(yesterdayShadow, tomorrowShadow)
     }
 
     this.setState({
