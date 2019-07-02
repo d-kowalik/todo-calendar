@@ -14,7 +14,8 @@ class App extends Component {
     initialPositionY: 0,
     currentPositionY: 0,
     lockedX: false,
-    lockedY: false
+    lockedY: false,
+    isMonthVisible: false
   }
 
   handleSwipeStart = event => {
@@ -99,6 +100,7 @@ class App extends Component {
     } else if (resY > 80) {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
       // Display month
+      this.setState({ isMonthVisible: true })
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.transition = 'all 0.2s ease-in-out'
       monthBlock.style.top = '-100%'
@@ -107,6 +109,7 @@ class App extends Component {
       }, 200)
     } else if (resY < -80) {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
+      this.setState({ isMonthVisible: false })
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.transition = 'all 0.2s ease-in-out'
       monthBlock.style.top = '0'
