@@ -31,7 +31,13 @@ function prevDate(monthSelected, date) {
   }
 }
 
-export const todosByDate = (state = {}, action, date, month) => {
+export const todosByDate = (
+  state = {},
+  action,
+  date,
+  month,
+  isMonthSelected
+) => {
   let todosAtDate = state[date]
   if (todosAtDate === undefined) {
     todosAtDate = getTodosFromCookies(date)
@@ -52,22 +58,24 @@ export const todosByDate = (state = {}, action, date, month) => {
 
   let nextId =
     todosAtDate.length === 0 ? 1 : todosAtDate[todosAtDate.length - 1].id + 1
+
+  const workingDate = isMonthSelected ? month : date
+  const workingTodos = isMonthSelected ? monthTodos : todosAtDate
   let newTodos
   switch (action.type) {
     case ADD_TODO:
-      newTodos = todosAtDate.concat({
+      newTodos = workingTodos.concat({
         id: nextId++,
         body: action.body,
         completed: false
       })
-      saveTodosToCookies(newTodos, date)
+      saveTodosToCookies(newTodos, workingDate)
       return {
         ...state,
-        [date]: newTodos,
-        [month]: monthTodos
+        [workingDate]: newTodos
       }
     case TOGGLE_TODO:
-      newTodos = todosAtDate.map(todo => {
+      newTodos = workingTodos.map(todo => {
         if (todo.id === action.id) {
           return {
             id: todo.id,
@@ -77,25 +85,24 @@ export const todosByDate = (state = {}, action, date, month) => {
         }
         return todo
       })
-      saveTodosToCookies(newTodos, date)
+      saveTodosToCookies(newTodos, workingDate)
       return {
         ...state,
-        [date]: newTodos,
-        [month]: monthTodos
+        [workingDate]: newTodos
       }
     case DELETE_TODO:
-      newTodos = todosAtDate.filter(todo => todo.id !== action.id)
-      saveTodosToCookies(newTodos, date)
+      newTodos = workingTodos.filter(todo => todo.id !== action.id)
+      saveTodosToCookies(newTodos, workingDate)
       return {
         ...state,
-        [date]: newTodos,
-        [month]: monthTodos
+        [workingDate]: newTodos
       }
     default:
       if (
         state[date] === undefined ||
         state[tomorrow] === undefined ||
-        state[yesterday] === undefined
+        state[yesterday] === undefined ||
+        state[month] === undefined
       ) {
         return {
           ...state,

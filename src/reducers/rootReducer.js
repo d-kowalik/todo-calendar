@@ -29,13 +29,18 @@ export const rootReducer = (state = {}, action) => {
     { date: state.selectedDate, month: state.selectedMonth },
     action
   )
-  console.log(selDate)
 
   const date = selDate.date
   const selectedMonthCpy = selDate.month
   const isMonthSelectedCpy = isMonthSelected(state.isMonthSelected, action)
   return {
-    todosByDate: todosByDate(state.todosByDate, action, date, selectedMonthCpy),
+    todosByDate: todosByDate(
+      state.todosByDate,
+      action,
+      date,
+      selectedMonthCpy,
+      isMonthSelectedCpy
+    ),
     filter: filter(state.filter, action),
     selectedDate: date,
     isMonthSelected: isMonthSelectedCpy,
