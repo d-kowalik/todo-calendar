@@ -34,14 +34,8 @@ export const rootReducer = (state = {}, action) => {
   const date = selDate.date
   const selectedMonthCpy = selDate.month
   const isMonthSelectedCpy = isMonthSelected(state.isMonthSelected, action)
-  const dateToPass = isMonthSelectedCpy ? selectedMonthCpy : date
   return {
-    todosByDate: todosByDate(
-      state.todosByDate,
-      action,
-      dateToPass,
-      isMonthSelectedCpy
-    ),
+    todosByDate: todosByDate(state.todosByDate, action, date, selectedMonthCpy),
     filter: filter(state.filter, action),
     selectedDate: date,
     isMonthSelected: isMonthSelectedCpy,
