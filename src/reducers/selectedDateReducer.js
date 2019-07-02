@@ -3,16 +3,34 @@ import {
   dateStringToDate,
   assembleDate,
   advanceDateByDay,
-  reverseDateByDay
+  reverseDateByDay,
+  getMonthDateEng
 } from '../dateHelper'
 import { ADVANCE_DAY, REVERSE_DAY } from '../actions'
 
-export const selectedDate = (state = today(), action) => {
+const initialState = {
+  date: today(),
+  month: getMonthDateEng(new Date())
+}
+
+export const selectedDate = (state = initialState, action) => {
+  if (state.date === undefined || state.month === undefined) {
+    state = initialState
+  }
+
   switch (action.type) {
     case ADVANCE_DAY:
-      return assembleDate(advanceDateByDay(dateStringToDate(state)))
+      const nextDate = advanceDateByDay(dateStringToDate(state.date))
+      return {
+        date: assembleDate(nextDate),
+        month: getMonthDateEng(nextDate)
+      }
     case REVERSE_DAY:
-      return assembleDate(reverseDateByDay(dateStringToDate(state)))
+      const prevDate = reverseDateByDay(dateStringToDate(state.date))
+      return {
+        date: assembleDate(prevDate),
+        month: getMonthDateEng(prevDate)
+      }
     default:
       return state
   }
