@@ -32,11 +32,15 @@ class App extends Component {
       const currentY = event.changedTouches[0].clientY
       const resX = this.state.initialPositionX - currentX
       const resY = this.state.initialPositionY - currentY
-      if (resX < -5 && !this.state.lockedY) {
+      if (resX < -5 && !this.state.lockedY && !this.state.isMonthVisible) {
         this.setState({ lockedX: true })
         const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
         yesterdayShadow.style.right = `${Math.max(100 + resX / 5, 0)}%`
-      } else if (resX > 5 && !this.state.lockedY) {
+      } else if (
+        resX > 5 &&
+        !this.state.lockedY &&
+        !this.state.isMonthVisible
+      ) {
         this.setState({ lockedX: true })
         const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
         tomorrowShadow.style.left = `${Math.max(100 - resX / 5, 0)}%`
