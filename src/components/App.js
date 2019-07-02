@@ -126,6 +126,9 @@ class App extends Component {
       }, 200)
     } else {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
+      const monthBlock = document.querySelector('.MonthBlock')
+      if (this.state.isMonthVisible) monthBlock.style.top = '-100%'
+      else monthBlock.style.top = '0'
     }
 
     this.setState({
