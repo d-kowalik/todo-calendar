@@ -14,7 +14,8 @@ class App extends Component {
     initialPositionY: 0,
     currentPositionY: 0,
     lockedX: false,
-    lockedY: false
+    lockedY: false,
+    isMonthVisible: false
   }
 
   handleSwipeStart = event => {
@@ -31,11 +32,15 @@ class App extends Component {
       const currentY = event.changedTouches[0].clientY
       const resX = this.state.initialPositionX - currentX
       const resY = this.state.initialPositionY - currentY
-      if (resX < -5 && !this.state.lockedY) {
+      if (resX < -5 && !this.state.lockedY && !this.state.isMonthVisible) {
         this.setState({ lockedX: true })
         const yesterdayShadow = document.querySelectorAll('.Shadow')[0]
         yesterdayShadow.style.right = `${Math.max(100 + resX / 5, 0)}%`
-      } else if (resX > 5 && !this.state.lockedY) {
+      } else if (
+        resX > 5 &&
+        !this.state.lockedY &&
+        !this.state.isMonthVisible
+      ) {
         this.setState({ lockedX: true })
         const tomorrowShadow = document.querySelectorAll('.Shadow')[1]
         tomorrowShadow.style.left = `${Math.max(100 - resX / 5, 0)}%`
@@ -45,12 +50,16 @@ class App extends Component {
 
       if (resY > 5 && !this.state.lockedX) {
         this.setState({ lockedY: true })
-        const monthBlock = document.querySelector('.MonthBlock')
-        monthBlock.style.top = `-${Math.max(resY / 5, 0)}%`
+        if (!this.state.isMonthVisible) {
+          const monthBlock = document.querySelector('.MonthBlock')
+          monthBlock.style.top = `-${Math.max(resY / 5, 0)}%`
+        }
       } else if (resY < -5 && !this.state.lockedX) {
         this.setState({ lockedY: true })
-        const monthBlock = document.querySelector('.MonthBlock')
-        monthBlock.style.top = `-${Math.max(100 + resY / 5, 0)}%`
+        if (this.state.isMonthVisible) {
+          const monthBlock = document.querySelector('.MonthBlock')
+          monthBlock.style.top = `-${Math.max(100 + resY / 5, 0)}%`
+        }
       } else if (this.state.lockedY) {
         this.setState({ lockedY: false })
       }
@@ -80,7 +89,7 @@ class App extends Component {
     const resY = this.state.initialPositionY - this.state.currentPositionY
     console.log(resY)
 
-    if (resX < -80) {
+    if (resX < -80 && !this.state.lockedY) {
       yesterdayShadow.style.transition = 'all 0.2s ease-in-out'
       yesterdayShadow.style.right = '0%'
       setTimeout(() => {
@@ -88,7 +97,7 @@ class App extends Component {
         yesterdayShadow.style.right = '100%'
         this.props.previousDay()
       }, 200)
-    } else if (resX > 80) {
+    } else if (resX > 80 && !this.state.lockedY) {
       tomorrowShadow.style.left = '0%'
       tomorrowShadow.style.transition = 'all 0.2s ease-in-out'
       setTimeout(() => {
@@ -99,6 +108,7 @@ class App extends Component {
     } else if (resY > 80) {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
       // Display month
+      this.setState({ isMonthVisible: true })
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.transition = 'all 0.2s ease-in-out'
       monthBlock.style.top = '-100%'
@@ -107,6 +117,7 @@ class App extends Component {
       }, 200)
     } else if (resY < -80) {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
+      this.setState({ isMonthVisible: false })
       const monthBlock = document.querySelector('.MonthBlock')
       monthBlock.style.transition = 'all 0.2s ease-in-out'
       monthBlock.style.top = '0'
@@ -115,6 +126,9 @@ class App extends Component {
       }, 200)
     } else {
       this.resetSideDays(yesterdayShadow, tomorrowShadow)
+      const monthBlock = document.querySelector('.MonthBlock')
+      if (this.state.isMonthVisible) monthBlock.style.top = '-100%'
+      else monthBlock.style.top = '0'
     }
 
     this.setState({

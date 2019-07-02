@@ -31,23 +31,24 @@ function prevDate(monthSelected, date) {
   }
 }
 
-export const todosByDate = (state = {}, action, date, isMonthSelected) => {
+export const todosByDate = (state = {}, action, date, month) => {
   let todosAtDate = state[date]
   if (todosAtDate === undefined) {
     todosAtDate = getTodosFromCookies(date)
   }
 
-  let tomorrow = nextDate(isMonthSelected, date)
+  let tomorrow = nextDate(false, date)
   let todosTomorrow = state[tomorrow]
   if (todosTomorrow === undefined) {
     todosTomorrow = getTodosFromCookies(tomorrow)
   }
 
-  let yesterday = prevDate(isMonthSelected, date)
+  let yesterday = prevDate(false, date)
   let todosYesterday = state[yesterday]
   if (todosYesterday === undefined) {
     todosYesterday = getTodosFromCookies(yesterday)
   }
+  let monthTodos = getTodosFromCookies(month)
 
   let nextId =
     todosAtDate.length === 0 ? 1 : todosAtDate[todosAtDate.length - 1].id + 1
@@ -62,7 +63,8 @@ export const todosByDate = (state = {}, action, date, isMonthSelected) => {
       saveTodosToCookies(newTodos, date)
       return {
         ...state,
-        [date]: newTodos
+        [date]: newTodos,
+        [month]: monthTodos
       }
     case TOGGLE_TODO:
       newTodos = todosAtDate.map(todo => {
@@ -78,14 +80,16 @@ export const todosByDate = (state = {}, action, date, isMonthSelected) => {
       saveTodosToCookies(newTodos, date)
       return {
         ...state,
-        [date]: newTodos
+        [date]: newTodos,
+        [month]: monthTodos
       }
     case DELETE_TODO:
       newTodos = todosAtDate.filter(todo => todo.id !== action.id)
       saveTodosToCookies(newTodos, date)
       return {
         ...state,
-        [date]: newTodos
+        [date]: newTodos,
+        [month]: monthTodos
       }
     default:
       if (
@@ -97,7 +101,8 @@ export const todosByDate = (state = {}, action, date, isMonthSelected) => {
           ...state,
           [date]: todosAtDate,
           [tomorrow]: todosTomorrow,
-          [yesterday]: todosYesterday
+          [yesterday]: todosYesterday,
+          [month]: monthTodos
         }
       }
       return state

@@ -6,7 +6,6 @@ import {
   SET_MONTH_SELECTED,
   SET_CORRECT_MONTH_STATE
 } from '../actions'
-import { getMonthDateEng } from '../dateHelper'
 
 function isMonthSelected(state = false, action) {
   switch (action.type) {
@@ -25,22 +24,18 @@ function isMonthSelected(state = false, action) {
   }
 }
 
-function selectedMonth(state = getMonthDateEng(new Date()), action) {
-  return state
-}
-
 export const rootReducer = (state = {}, action) => {
-  const date = selectedDate(state.selectedDate, action)
+  const selDate = selectedDate(
+    { date: state.selectedDate, month: state.selectedMonth },
+    action
+  )
+  console.log(selDate)
+
+  const date = selDate.date
+  const selectedMonthCpy = selDate.month
   const isMonthSelectedCpy = isMonthSelected(state.isMonthSelected, action)
-  const selectedMonthCpy = selectedMonth(state.selectedMonth, action)
-  const dateToPass = isMonthSelectedCpy ? selectedMonthCpy : date
   return {
-    todosByDate: todosByDate(
-      state.todosByDate,
-      action,
-      dateToPass,
-      isMonthSelectedCpy
-    ),
+    todosByDate: todosByDate(state.todosByDate, action, date, selectedMonthCpy),
     filter: filter(state.filter, action),
     selectedDate: date,
     isMonthSelected: isMonthSelectedCpy,
