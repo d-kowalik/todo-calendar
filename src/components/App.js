@@ -46,12 +46,16 @@ class App extends Component {
 
       if (resY > 5 && !this.state.lockedX) {
         this.setState({ lockedY: true })
-        const monthBlock = document.querySelector('.MonthBlock')
-        monthBlock.style.top = `-${Math.max(resY / 5, 0)}%`
+        if (!this.state.isMonthVisible) {
+          const monthBlock = document.querySelector('.MonthBlock')
+          monthBlock.style.top = `-${Math.max(resY / 5, 0)}%`
+        }
       } else if (resY < -5 && !this.state.lockedX) {
         this.setState({ lockedY: true })
-        const monthBlock = document.querySelector('.MonthBlock')
-        monthBlock.style.top = `-${Math.max(100 + resY / 5, 0)}%`
+        if (this.state.isMonthVisible) {
+          const monthBlock = document.querySelector('.MonthBlock')
+          monthBlock.style.top = `-${Math.max(100 + resY / 5, 0)}%`
+        }
       } else if (this.state.lockedY) {
         this.setState({ lockedY: false })
       }
