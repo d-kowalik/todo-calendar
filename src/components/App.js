@@ -81,7 +81,7 @@ class App extends Component {
     const resY = this.state.initialPositionY - this.state.currentPositionY
     console.log(resY)
 
-    if (resX < -80) {
+    if (resX < -80 && !this.state.lockedY) {
       yesterdayShadow.style.transition = 'all 0.2s ease-in-out'
       yesterdayShadow.style.right = '0%'
       setTimeout(() => {
@@ -89,7 +89,7 @@ class App extends Component {
         yesterdayShadow.style.right = '100%'
         this.props.previousDay()
       }, 200)
-    } else if (resX > 80) {
+    } else if (resX > 80 && !this.state.lockedY) {
       tomorrowShadow.style.left = '0%'
       tomorrowShadow.style.transition = 'all 0.2s ease-in-out'
       setTimeout(() => {
